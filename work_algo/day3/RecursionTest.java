@@ -120,12 +120,12 @@ public class RecursionTest {
 	/*
 	 * 각 자릿수의 합을 구하는 함수
 	 */
-//	public static int digitSum2(int num)
-//	{
-//		int sum = num%10;
-//		sum += digitSum2(num/10);
-//		return sum;
-//	}
+	public static int digitSum2(int num)
+	{
+		int sum = num%10;
+		sum += digitSum2(num/10);
+		return sum;
+	}
 	static int digitSum(int num, int sum)
 	{
 		if(num == 0)
