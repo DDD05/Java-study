@@ -59,7 +59,7 @@
     - 함수 호출의 대상이 바뀐다.
         - 기능이 늘어나면 모두 제어하기 힘들다.
 10. **Call by value && Call by Reference**
-    - 자바는 Call by value를 선택.
+    - 자바는 *Call by value*를 선택.
         - 파라미터 값으로 객체를 넘기면 그 객체의 주소가 넘어가
 11. `This`
     - 필드명과 로컬변수의 이름이 같을때 구분하기 위해서 필드앞에 지정
@@ -90,3 +90,117 @@
 ---
 
 공통적인 성질을 추출해서 그 성질을 일반적인 특성으로 가지는 모듈을 하나.
+
+### `super();`
+
+---
+
+    public Manager(String name, double salary, MyDate birthDate, String dept) {
+    //		super();	 부모 기본 생성자 호출
+    		this.name = name;
+    		this.salary = salary;
+    		this.birthDate = birthDate;
+    		this.dept = dept;
+    	}
+
+`super()`를 호출하지 않아도 자동으로 호출된다.
+
+**상속 받은 클래스는 메모리에 올라갈때 부모클래스가 아니더라도 함께 메모리에 올라간다.** 
+
+자식을 생산한다. → 부모가 만들어진다. 
+
+### Method Overriding (메소드 재정의)
+
+---
+
+상속관계에 있는 두 클래스에서 적용되는 원리
+
+- 부모가 가진 기능을 물려받고 그것을 자식이 다시 고쳐쓰는 것
+
+### Rule
+
+메소드 선언부는 모두 일치 (리턴타입, 이름, 인자값) → 접근 지정자
+
+메소드 구현부는 반드시 달라야한다. (순서, 타입, 갯수중 하나라도 달라야한다.)
+
+**More modifier / Less Exception**
+
+*parent*
+
+    public void eat(String kind, String num)
+    void go()
+
+*child*
+
+    void eat(String kind, String num) //  x 
+    public void eat(String kind, String num)
+    public void go() {  // ok
+
+### Object method
+
+---
+
+`Test t = new Test();`에서의 `new Test`는 **참조변수.**
+
+**참조변수**뒤에는 `toString()`이 생략되어있다.
+
+### 접근지정자 Access Modifier
+
+---
+
+public , protected , private 
+
+protected는 상속이 되어있을때 public이 된다.
+
+### `this` && `super` 사용법
+
+---
+
+1. **`super()`와 `this()`생성자는 함께 사용할 수 없다?**
+
+    ### 해결
+
+    - 생성자는 클래스의 생성시에 단 한번만 호출되며, 객체의 초기화를 담당한다.
+    - `super()`는 항상 가장 첫줄에 제시되어있다. ( 명시하지 않았다면 생략되어있음 )
+
+    ### IF
+
+    - `this()`생성자 호출을 통해서 해당 생성자에서  다른 생성자로 이동하면 그곳에 super() 메소드가 생략되어 있다. 따라서, `super()` 생성자는 항상 가장 첫줄에 제시되어있다.
+
+생성자는 메소드가 아니다!!
+
+# Overroading
+
+---
+
+메소드 하는 일은 같고 처리하는 데이터를 달리할때 쓰이는 기법
+
+### 조건
+
+- 메서드의 **이름**이 같아야 한다.
+- 메서드의 **리턴타입**이 다른 경우는 오버로딩이 성립되지 않는다.
+- 매개변수의 개수 or 매개변수의 자료형이 달라야 한다.
+
+### 참고자료
+
+---
+
+[생성자(Constructor)도 메소드인가?](https://javacan.tistory.com/entry/37)
+
+# 상속(Polymorphism = Poly+Morphism)
+
+---
+
+하나의 객체변수가 여러개의 모습과 모양을 갖는 능력
+
+부모타입의 변수로 다양한 자식객체를 생성하는 것
+
+- Virtual Method Invocation 원리
+- Object Casting
+- [Instanceof](https://www.notion.so/d5914ea3-97d8-4c98-81a4-63b746c8a636)
+
+# 리턴(Return)의 중요성
+
+---
+
+클라이언트의 요청 하나당 서버 사이드의 메소드로 응답한다.
