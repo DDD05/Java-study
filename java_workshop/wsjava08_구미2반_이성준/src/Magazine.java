@@ -1,32 +1,32 @@
 
 public class Magazine extends Book{
-	private Book book;
-	private int year;
-	private int month;
+
+	private int month;	// 호
+
 	public Magazine() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Magazine(String isbn, String title, String author, String publisher, int price, String desc, int year, int month) {
-		super(isbn, title, author, publisher, price, desc);
-		this.year = year;
-		this.month = month;
-		// TODO Auto-generated constructor stub
-	}
-	public Magazine(String isbn, String title, String author, String publisher, int price, String desc) {
-		super(isbn, title, author, publisher, price, desc);
-		// TODO Auto-generated constructor stub
-	}
-	public Magazine(Book book, int year, int month) {
-		super();
-		this.book = book;
-		this.year = year;
+
+	public Magazine(String isbn, String title, int price, int quantity, int month) {
+		super(isbn, title, price, quantity);
 		this.month = month;
 	}
+
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
 	@Override
 	public String toString() {
-		return "Magazine [book=" + book + ", year=" + year + ", month=" + month + "]";
+		return super.toString() + "\tmonth= " + month + "\n";
 	}
+
+	
 
 	
 }

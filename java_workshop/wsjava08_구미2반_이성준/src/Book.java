@@ -1,10 +1,11 @@
 
 public class Book {
 
-	private String isbn;
-	private String title;
-	private int price;
-	private int quantity;
+	private String isbn;	// 도서 번호
+	private String title;	// 도서명
+	private int price;		// 가격
+	private int quantity;	// 재고
+	
 	public Book() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,12 +38,25 @@ public class Book {
 	public int getQuantity() {
 		return quantity;
 	}
+	public void plusQuantity(int quantity)
+	{
+		this.quantity += quantity;
+	}
+	public void minusQuantity(int quantity) throws QuantityException
+	{
+		if(this.quantity < quantity)
+			throw new QuantityException();
+		this.quantity -= quantity;
+	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	@Override
 	public String toString() {
-		return "Book\tisbn=" + isbn + "\ttitle=" + title + "\tprice=" + price + "\tquantity=" + quantity;
+		String output = "\t" + this.getClass().getName() + "\tisbn= " + isbn + "\ttitle= " + title + "\t\tprice= " + price + "\tquantity= " + quantity;
+		if(!(this instanceof Magazine))
+			output = "\t" + this.getClass().getName() + "\t\tisbn= " + isbn + "\ttitle= " + title + "\t\tprice= " + price + "\tquantity= " + quantity + "\n";
+		return output;
 	}
 	
 	
