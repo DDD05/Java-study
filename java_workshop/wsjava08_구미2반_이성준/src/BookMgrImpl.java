@@ -77,6 +77,7 @@ class BookMgrImpl implements IBookMgr{
 	@Override
 	public ArrayList<Book> open() throws IOException {
 		BufferedReader br = null;
+		ArrayList<Book> bList = new ArrayList<>();
 		try {
 			br = new BufferedReader(new FileReader(new File("book.dat")));
 			String line = "";
@@ -94,7 +95,7 @@ class BookMgrImpl implements IBookMgr{
 				b.setQuantity(Integer.parseInt(data[3]));
 				if(b instanceof Magazine)
 					((Magazine) b).setMonth(Integer.parseInt(data[4]));
-				books.add(b);
+				bList.add(b);
 			}
 		}finally{
 			try
@@ -106,7 +107,7 @@ class BookMgrImpl implements IBookMgr{
 				System.out.println(e);
 			}
 		}
-		return books;
+		return bList;
 	}
 
 	@Override
