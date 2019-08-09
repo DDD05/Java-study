@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MAIL SYSTEM "email.dtd">
+<MAIL>
+	<HEADER>
+		<RECEIVER>hsh@ssafy.com</RECEIVER>
+		<SENDER>diana@korea.com</SENDER>
+		<TITLE>Missing</TITLE>
+	</HEADER>
+	<BODY>Internal DTD example</BODY>
+</MAIL>
