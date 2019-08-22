@@ -1,0 +1,74 @@
+package broker.domain;
+
+import java.util.ArrayList;
+
+/*
+ * 고객에 대한 정보를 보유하고 있는 클래스...
+ * ::
+ * 
+ */
+public class CustomerRec {
+	private String ssn;
+	private String name;	//컬럼명은 cust_name
+	private String address;
+	
+	private ArrayList<SharesRec> portfolio;
+
+	public CustomerRec() {
+		super();
+	}
+
+	public CustomerRec(String ssn, String name, String address, ArrayList<SharesRec> portfolio) {
+		super();
+		this.ssn = ssn;
+		this.name = name;
+		this.address = address;
+		this.portfolio = portfolio;
+	}
+
+	public CustomerRec(String ssn, String name, String address) {
+		super();
+		this.ssn = ssn;
+		this.name = name;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "CustomerRec [ssn=" + ssn + ", name=" + name + ", address=" + address + ", portfolio=" + portfolio + "]";
+	}
+
+	public String getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public ArrayList<SharesRec> getPortfolio() {
+		return portfolio;
+	}
+
+	public void setPortfolio(ArrayList<SharesRec> portfolio) {
+		this.portfolio = portfolio;
+	}
+	
+	
+}
