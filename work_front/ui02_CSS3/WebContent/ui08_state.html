@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+	/* 속성 선택자 */
+	input[type=text]{
+		background : blue;
+	}
+	/* input[disabled=disabled]{
+		background : gray;
+	} */
+	input[name=address]{ background: cyan; }
+	input[name=id]{ background: yellow; }
+	
+	/* 상태 선택자 */
+	input:focus{ background: orange; }
+	
+</style>
+</head>
+<body>
+<h2>State Selector</h2>
+<form action="">
+
+	<h3>Enable</h3>
+	<input type="text" name="id">
+
+	<h3>Disable</h3>
+	<input type="text" name="name" value="disable" disabled="disabled">
+
+	<h3>ReadOnly</h3>
+	<input type="text" name="password" value="Read Only" readonly="readonly">
+
+	<h3>Required</h3>
+	<input type="text" name="address" required="required">
+	
+</form>
+</body>
+</html>

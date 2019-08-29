@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style type="text/css">
+
+	table
+	{
+		border-top : 2px solid red;
+		border-bottom : 1px solid red;
+		width : 60%;
+	}
+	/* 직계자식, 후손 */
+	table tr th
+	{
+		background-color : red;
+		color: white;
+	}
+	tr>td
+	{
+		border-bottom: 2px dotted pink;
+	}
+	table tr:HOVER
+	{
+		background: pink;
+	}
+	
+	table td
+	{
+		text-align: center;
+	}
+	
+</style>
+</head>
+<body>
+<h2 align="center"> Table에 Hover효과 부여하기</h2>
+	<table align="center">
+		<tr>
+			<th>이 름</th><th>주 소</th><th>전화번호</th>
+		</tr>
+		<tr>
+			<td>효리</td><td>제주</td><td>111-222</td>
+		</tr>
+		
+		<tr>
+			<td>효리</td><td>제주</td><td>111-222</td>
+		</tr>
+		
+		<tr>
+			<td>효리</td><td>제주</td><td>111-222</td>
+		</tr>
+		
+		<tr>
+			<td>효리</td><td>제주</td><td>111-222</td>
+		</tr>
+		
+	</table>
+</body>
+</html>

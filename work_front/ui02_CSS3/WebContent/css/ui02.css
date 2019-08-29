@@ -1,0 +1,21 @@
+@charset "EUC-KR";
+
+/*
+	* {
+		color : purple;
+	}
+*/
+	body{
+		color : purple;
+	}
+	h2{
+		color : orange;
+		font-family: cursive;
+		font-size : 20pt;
+	}
+	/* div태그인데 id값이 wrap인 선택자를 지정 */
+	div#wrap{
+		border: 2px solid magenta;
+	}
+	/* class 속성에 대한 block인 선택자를 지정 ... 배경색을 cyan으로 */
+	.block{ background : cyan; }
