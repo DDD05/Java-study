@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>호이스팅 :: Hoisting</title>
+	<script type="text/javascript">
+		doSomething();
+		function doSomething()	//선언적 함수 선언
+		{
+			alert("not defined : " + some);
+			var some = "WellBeing";
+			alert("defined : " + some);
+		}
+		
+		//2. 전역변수 지역변수
+		var name = "James";	//전역변수
+		function showName()	
+		{
+			var name = "Gosling"; //지역변수
+			console.log(name);	
+		}
+		console.log(name);	// James
+		showName();// Gosling
+	</script>
+</head>
+<body>
+
+</body>
+</html>

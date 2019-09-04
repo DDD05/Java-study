@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>page 296</title>
+<script type="text/javascript">
+	function push()
+	{
+		flag = true;
+		retwindow = window.open("js11_open.jsp",'width=600,height=600',true);
+		setTimeout(function()	{ //딱 한번만 호출
+			if(flag)
+				{
+					retwindow.close();
+					flag = false;
+				}
+			else 
+				{
+				retwindow = window.open("js11_open.jsp",'width=600,height=600',true);
+				flag=true;
+				}
+			},3000);
+	}
+	function push2()
+	{
+		if(flag)
+			{
+			retwindow.close();
+			flag = false;			
+			}
+		
+	}
+	
+</script>
+</head>
+<body>
+	<button onclick="push()">이곳True을 클릭하세용</button>
+	<button onclick="push2()">이곳False을 클릭하세용</button>
+</body>
+</html>

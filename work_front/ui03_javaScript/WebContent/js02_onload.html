@@ -1,0 +1,30 @@
+<!--
+	window.onload function(){}
+	1. html 문서에 포함된 모든 콘텐츠가 로드된 후에 실행되는 함수
+	2. 동일한 문서에 window.onload는 단 하나만 존재해야한다.
+	3. body 태그에도 onload 속성을 지정할 수 있다. 이때, window.onload속성은 무시된다.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>Insert title here</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			alert("aaa");
+			
+		}
+		$(document).ready(function() {
+		    alert("첫번째 ready...");
+		});
+		$(document).ready(function() {
+		    alert("두번째 ready...");
+		});
+	</script>
+
+</head>
+<body>
+	
+</body>
+</html>

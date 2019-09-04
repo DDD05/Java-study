@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>선언적함수 정의 | 익명함수 정의</title>
+	<script type="text/javascript">
+		//1. 익명함수 재정의
+/* 		var func = function(){ alert("func A"); };
+		var func = function(){ alert("func B"); };
+		func(); */
+/* 		func();
+		function func(){ alert(test); }
+		var test = "test"; */
+		/* function func(){ alert("func B"); } */
+		
+		var func = function(){ alert("func inner"); }// 나중에
+		function func() { alert("func declear "); }	// 먼저
+		func();
+	</script>
+</head>
+<body>
+</body>
+</html>

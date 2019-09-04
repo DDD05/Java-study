@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title></title>
+<style type="text/css">
+	#resultView{
+		position: absolute;
+		top : 150px;
+		left : 20px;
+		width : 250px;
+		height: 200px;
+		border : 1px solid #f00;
+		margin-top: 10px;
+		margin-left : 10px;
+		fort-size : 0.8em;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function()
+	{
+			var preView = document.getElementById("preView");
+			preView.onclick = processText;	// 버튼 클릭시 processText 함수를 호출
+	}
+	function processText()
+	{
+		// 내가 입력한 내용일 줄단위로 resultView영역에 뿌려지도록  
+		// 복합연산자, innerHTML, for
+		var msg = document.getElementById("inputBox").value;
+		var msgList = msg.split("\n");
+		var output = "";
+		for(var line in msgList)
+			output += (parseInt(line)+1)+ "번째 줄 : " + msgList[line] + "<br>";
+		document.getElementById("resultView").innerHTML = "<font color = green>" + output + "</font>";
+		
+	}
+</script>
+</head>
+<body>
+	<textarea rows="5" cols="30" id="inputBox"></textarea>
+	<div>
+		<button id="preView">preView</button>
+	</div>
+	<div id="resultView">
+	</div>
+</body>
+</html>

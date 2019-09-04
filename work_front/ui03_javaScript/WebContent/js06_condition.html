@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>alert(), innerHTML, write() :: 조건문</title>
+	<script>
+		document.write('50+70'+'<br>');
+		document.write(eval('50+70-1*2')+'<br>'); //57.. 문자열 계산하려면 .. eval()
+		document.write(eval('50.6+70')+'<br>'); //57.. 문자열 계산하려면 .. eval()
+		document.write(eval('50.6+70'+'10')+'<br>'); //57.. 문자열 계산하려면 .. eval()
+		//각각 숫자로 변환해주는 함수를 사용
+		document.write(parseFloat('50.6')+parseFloat('10.4')+'<br>'); //57.. 문자열 계산하려면 .. eval()
+		
+		//2. 대화창 :: alert(), prompt(), confirm()
+		/* var ans = confirm("정말 탈퇴하시겠습니가?");
+		if(ans) document.write("삭제되셨습니다...<br>");
+		else document.write("삭제불가...<br>"); */
+
+		if(confirm("정말 탈퇴하시겠습니가?")) document.write("삭제되셨습니다...<br>");
+		else document.write("삭제불가...<br>");
+		
+		var name = prompt("다신의 이름은?");
+		document.write("내 이름은 "+name+" 입니다. <br>");
+		
+		//3. 날짜 출력하기....
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth()+1;	//0~11까지의 월을 반환... 그래서 항상 뒤에 11을 붙이자
+		var day = date.getDate();
+		document.write("Today is "+ year + "-" + month + "-" + day + "<br>");
+		
+		//시간
+		var hour = date.getHours();//현재 시간을 받아올수있다.
+		
+		switch(true)
+		{
+			case hour<12:
+				document.write("지금은 오전 " + hour + " 시 입니다.");
+				break;
+				
+			case 12 <= hour && hour <= 14:
+				document.write("지금은 점심시간입니다. 현재시간 " + hour + " 시 입니다.");
+				break;
+			default:
+				document.write("지금은 오후 " + (hour%12) + " 시 입니다.");
+				break;
+		}
+		
+		if(false == 0)
+			document.write("good");
+		else 
+			document.write("noGood");
+	</script>
+</head>
+<body>
+</body>
+</html>

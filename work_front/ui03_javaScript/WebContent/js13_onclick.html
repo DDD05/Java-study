@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title></title>
+<script type="text/javascript">
+	function ageCheck() {
+		var age = document.getElementById("age");
+		/* var age = document.ageFrm.age; */
+		
+
+		if (age.value == "") {
+			alert("나이를 입력바람!!!");
+		} else if (isNaN(age.value)) {
+			alert("숫자를 입력바람!!!");
+		} else if (age.value < 19) {
+			alert("미성년자입니다. 입장불가!!!");
+		} else {
+			alert("성년입니다. 입장 가능!!!");
+		}
+		age.value="";
+		age.focus();
+	}
+</script>
+</head>
+<body>
+	<form name="ageFrm">
+		나이 : <input type="text" name="age" id="age"> <input
+			type="button" value="나이확인" onclick="ageCheck()">
+			<input type="button" value="나이확인2" onclick="ageCheck">
+	</form>
+</body>
+</html>
