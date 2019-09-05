@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+		var xhr, id;
+		function startRequest(){
+			id = document.getElementById("id").value;
+			//1. XMLHttpRequest 생성... 
+			xhr = new XMLHttpRequest();
+
+			//2. callback 함수 등록 (음답시 처리함)
+			xhr.onreadystatechange = callback;
+			
+			//3. 어데로 탁구공 날라갈 지정함
+			xhr.open("get","GetAjaxServlet?id="+id);
+			
+			//4. 실제로 날린다
+			xhr.send(null); // get방식  || post방식일 경우 url로 데이터를 보내지 않고 객체로 보낸다.
+		}
+		function callback(){
+			alert("콜백 호출 : " + xhr.readyState);
+			if(xhr.readyState == 4)
+				{
+					if(xhr.status==200)
+						{
+						var text = xhr.responseText;
+						document.getElementById("resultView").innerHTML = "<font color=magenta size=7>" + text + "</font>";
+						}
+				}
+					else
+						{	//readyState == 2 or 3
+						document.getElementById("resultView").innerHTML = 
+							"<img src='image/a.gif'> ";
+						}
+		}
+</script>
+</head>
+<body>
+	<h2>비동기 통신 요청하기</h2>
+	ID : <input type="text" name="id" id="id">
+	<input type="button" value="중복확인" onclick="startRequest()">
+	<span id="resultView"></span>
+</body>
+</html>

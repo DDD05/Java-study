@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<style type="text/css">
+	
+</style>
+<script type="text/javascript">
+	$(function(){
+		$('#ajaxId').click(function(){
+			var id = $('#userId').val();
+			var pass = $('#userPass').val();
+			//비동기 통신 시작...
+			$.ajax({
+				type:"post",
+				url:"HelloAjax",
+				data:"id="+id+"&&pass="+pass,
+				
+				//응답....
+				success:function(result){
+					$('#resultView').html(result).css({
+						'background' : 'yellow', 'color' : 'red' , 'font-size' : '6'
+					});
+				}//success
+			});//ajax
+		});//click
+	});//ready
+</script>
+</head>
+<body>
+	ID : <input type="text" name="userId" id="userId"><br><br>
+	password : <input type="password" name="userPass" id="userPass"><br><br>
+	<input type="button" value="로그인" id="ajaxId">
+	<span id="resultView"></span>
+</body>
+</html>
