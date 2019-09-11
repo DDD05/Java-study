@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function dragon(){
+		id = document.frm.userID.value;
+		location.href="hello?userID="+id;
+	}
+</script>
+</head>
+<body>
+<h2 align="center">Hello HttpServlet!!</h2>
+<form action="hello" method="post" name="frm">
+	ID <input type="text" name="userID" required="required">
+	<input type="submit" value="SENDING">
+</form>
+<hr>
+<a href="javascript:dragon()">Click Here</a>
+</body>
+</html> 
