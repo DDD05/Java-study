@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body * {
+	margin: 10px;
+}
+</style>
+</head>
+<body>
+	<h2 align="center">Multi Form Test...</h2>
+	<form action="MFS" method="get">
+		ID : <input type="text" name="userID" value="ssafy"><br>
+		PASSWORD : <input type="password" name="userPwd" value="ssafy"><br>
+		HOBBY <br> <label><span>노래듣기</span><input type="checkbox"
+			name="hobby" value="노래듣기"></label> <label><span>음악듣기</span><input
+			type="checkbox" name="hobby" value="음악듣기"></label> <label><span>뮤직듣기</span><input
+			type="checkbox" name="hobby" value="뮤직듣기"></label> <label><span>음원듣기</span><input
+			type="checkbox" name="hobby" value="음원듣기"></label><br> 성별 : <label><span>여</span><input
+			type="radio" name="gender" value="female"></label><label><span>남</span>
+			<input type="radio" name="gender" value="male"></label> <input
+			type="hidden" name="command" value="register"><br> <br>
+		<hr>
+		<select name="tel">
+			<option value="구미">031</option>
+			<option>02</option>
+			<option>054</option>
+			<option>053</option>
+			<option>051</option>
+		</select><br> <br>
+		<textarea rows="10" cols="60" name="intro">	SSAFY 사이트를 방문해 주셔서 감사합니다.</textarea>
+		<br> <br> <input type="submit" value="send"> <input
+			type="reset" value="clear">
+	</form>
+</body>
+</html>

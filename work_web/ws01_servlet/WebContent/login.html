@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+        <title>Hello world</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            .container{
+                border : 10px solid black;
+                overflow : hidden;
+                margin-top : 60px;
+                padding : 30px;
+            }
+        </style>
+<script type="text/javascript">
+	$(function(){
+		var id
+		var pw
+		var select;
+			$("input[name=login]").click(function(){
+				id = $("input[name=userId]").val()
+				pw = $("input[name=userPw]").val()
+				select = $("input[name=login]").val()
+				if((id == '') || (pw == '')){
+					alert("ID나 PASSWORD를 입력해 주세요.");
+				}else{
+					$.ajax({
+						url: "MainServlet",
+						contentType: "application/x-www-form-urlencoded; charset=utf-8",
+						type: "post",
+						data: "select=" + select + "&&userId=" + id + "&&userPw=" + pw,
+						success: function(result){
+							if(result == "aaa"){
+								location.href="http://localhost:8888/ws01_servlet/result.html"
+							}else{
+								alert("ID나 PASSWORD가 틀렸습니다.")
+							}
+						}
+					})
+				}
+			})
+	})
+</script>
+</head>
+<body>
+        <div class="container">
+            <div class="row">
+                <img class="col-sm-5 float-left" width="300" height="300" src="https://previews.123rf.com/images/sashkin7/sashkin71608/sashkin7160800017/62429906-%ED%99%A9%EA%B8%88-%EC%97%B4%EC%87%A0%EC%99%80-%ED%9D%B0%EC%83%89%EC%97%90-%EA%B3%A0%EB%A6%BD-%EB%90%9C-%ED%8D%BC%EC%A6%90.jpg">
+                <div class="col-sm-4 float-left">
+                    <h3 class="h3">로그인하여 주세요.</h3><br>
+                    <form id="loginForm" action="MainServlet">
+                        ID : <input id="id" class="form-control" type="text" name="userId"><br>
+                        PASSWORD : <input id="pw" class="form-control" type="password" name="userPw"><br>
+                        <hr>
+                        <input name="login" id="login" class="btn btn-primary" type="button" value="login">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

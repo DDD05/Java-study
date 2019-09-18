@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+        <title>Hello world</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            .container{
+                border : 10px solid black;
+                overflow : hidden;
+                margin-top : 60px;
+                padding : 30px;
+            }
+        </style>
+<script type="text/javascript">
+	window.onload = function(){
+		loginAction();
+		startRequest();
+	}
+	function loginAction(){
+		userID = document.getElementById("userID").value;
+		userPwd = document.getElementById("userPwd").value;
+		logic = document.getElementById("logic").value;
+	}
+	function startRequest(){
+		//1. XMLHttpRequest 생성... 
+		xhr = new XMLHttpRequest();
+		
+		//2. callback 함수 등록 (음답시 처리함)
+		xhr.onreadystatechange = callback;
+		
+		//3. 어데로 탁구공 날라갈 지정함
+		xhr.open("post","GetAjaxServlet");
+		data = { userID : userID , userPwd : userPwd , logic : logic };
+		
+		//4. 실제로 날린다
+		xhr.send(data); // get방식  || post방식일 경우 url로 데이터를 보내지 않고 객체로 보낸다.
+	}
+	function callback(){
+		if(xhr.readyState == 4)
+			{
+				if(xhr.status==200)
+					{
+					var text = xhr.responseText;
+					document.getElementById("resultView").innerHTML = "<font color=magenta size=7>" + text + "</font>";
+					}
+			}
+	}
+</script>
+</head>
+<body>
+        <div class="container">
+            <div class="row">
+                <img class="col-sm-5 float-left" width="300" height="300" src="https://previews.123rf.com/images/sashkin7/sashkin71608/sashkin7160800017/62429906-%ED%99%A9%EA%B8%88-%EC%97%B4%EC%87%A0%EC%99%80-%ED%9D%B0%EC%83%89%EC%97%90-%EA%B3%A0%EB%A6%BD-%EB%90%9C-%ED%8D%BC%EC%A6%90.jpg">
+                <div class="col-sm-4 float-left">
+                    <h3 class="h3">로그인하여 주세요.</h3><br>
+                    <form id="loginForm" action="MainServlet">
+                        ID : <input id="userID" class="form-control" type="text" name="userID"><br>
+                        PASSWORD : <input id="userPwd" class="form-control" type="password" name="userPwd"><br>
+                        <hr>
+                        <input name="login" id="login" class="btn btn-primary" type="button" value="login">
+                        <input name="logic" type="hidden" value="login">
+                    </form>
+                </div>
+                <div class="col-sm-auto"></div>
+            </div>
+        </div>
+    </body>
+
+</html>
