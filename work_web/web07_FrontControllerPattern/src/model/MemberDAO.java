@@ -152,7 +152,6 @@ public class MemberDAO {
 		}
 		return list;
 	}
-	
 	public static void main(String[] args) throws Exception
 	{
 		//		MemberDAO dao = MemberDAO.getInstance();

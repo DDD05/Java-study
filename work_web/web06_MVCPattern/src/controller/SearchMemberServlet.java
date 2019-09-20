@@ -24,15 +24,14 @@ public class SearchMemberServlet extends HttpServlet{
 		 * 5. 페이지 이동 ...forward -> find_result.jsp  
 		 * 
 		 */
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("utf-8");
 		String id = request.getParameter("id");
+		String name = request.getParameter("name");
 		try {
 			MemberDAO memberDAO = MemberDAO.getInstance();
 			MemberVO rvo = null;
 			rvo = memberDAO.findByIdMember(id);
 			request.setAttribute("memberVO", rvo);
-			request.getRequestDispatcher("find_result.jsp").forward(request,response);;
+			request.getRequestDispatcher("find_result.jsp?name="+name).forward(request,response);;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

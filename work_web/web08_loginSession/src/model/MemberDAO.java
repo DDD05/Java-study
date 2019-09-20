@@ -153,6 +153,29 @@ public class MemberDAO {
 		return list;
 	}
 	
+	public MemberVO login(String id, String password) throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		MemberVO vo = null;
+		try {
+			conn = getConnection();
+			String query = "SELECT * FROM MEMBER WHERE id=? AND password=?";
+			ps = conn.prepareStatement(query);
+			ps.setString(1, id);
+			ps.setString(2, password);
+			rs = ps.executeQuery();
+			if(rs.next())
+			{
+				vo = new MemberVO(id, password, rs.getString("name") , rs.getString("address"));
+			}
+			
+		}finally
+		{
+			closeAll(rs,ps,conn);
+		}
+		return vo;
+	}
 	public static void main(String[] args) throws Exception
 	{
 		//		MemberDAO dao = MemberDAO.getInstance();
