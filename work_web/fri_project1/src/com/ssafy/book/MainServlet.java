@@ -2,6 +2,7 @@ package com.ssafy.book;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,9 +41,89 @@ public class MainServlet extends HttpServlet {
 		case "registerBookInfo":
 			path = registerBookInfo(request);
 			break;
+		case "printAll":
+			path = printAll(request);
+			break;
+		case "printBook":
+			path = printBook(request);
+			break;
+		case "updatePage":
+			path = updatePage(request);
+			break;
+		case "update":
+			path = update(request);
+			break;
+		case "remove":
+			path = remove(request);
+			break;
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+	}
+	private String remove(HttpServletRequest request)
+	{
+		String isbn = request.getParameter("isbn");
+
+		try {
+			BookMgr.getInstance().delete(isbn);
+		} catch (NumberFormatException e) {
+			System.out.println(e);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return "main.jsp";
+	}
+	private String update(HttpServletRequest request)
+	{
+		String isbn = request.getParameter("isbn");
+		System.out.println("isbn : " + isbn);
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String price = request.getParameter("price");
+		String desc = request.getParameter("desc");
+		try {
+			BookMgr.getInstance().update(new Book(isbn,title,author,Integer.parseInt(price),desc));
+		} catch (NumberFormatException e) {
+			System.out.println(e);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return "main.jsp";
+	}
+	private String printBook(HttpServletRequest request)
+	{
+		String isbn = request.getParameter("isbn");
+		try {
+			Book book = BookMgr.getInstance().search(isbn);
+			request.setAttribute("book", book);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return "printBook.jsp";
+	}
+	private String updatePage(HttpServletRequest request)
+	{
+		String isbn = request.getParameter("isbn");
+		try {
+			Book book = BookMgr.getInstance().search(isbn);
+			request.setAttribute("book", book);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return "update.jsp";
+	}
+	private String printAll(HttpServletRequest request)
+	{
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("userID");
+		
+		try {
+			ArrayList<Book> list = (ArrayList<Book>) BookMgr.getInstance().searchAll(user.getId());
+			request.setAttribute("list", list);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return "printBookList.jsp";
 	}
 	private String login(HttpServletRequest request)
 	{
@@ -74,10 +155,12 @@ public class MainServlet extends HttpServlet {
 		String publisher = request.getParameter("publisher");
 		String author = request.getParameter("author");
 		String price = request.getParameter("price");
-		String currency = request.getParameter("currency");
+		String currency = request.getParameter("priceUnit");
 		String desc = request.getParameter("desc");
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("userID");
 		try {
-			BookMgr.getInstance().insertBook(new Book(tel,title,category,fromBook,publishDay, 
+			BookMgr.getInstance().insertBook(user.getId(),new Book(tel,title,category,fromBook,publishDay, 
 					publisher, author, Integer.parseInt(price),currency,desc));
 			request.setAttribute("status", "bookRegister");
 		} catch (SQLException e) {

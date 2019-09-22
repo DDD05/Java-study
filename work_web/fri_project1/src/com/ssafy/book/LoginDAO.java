@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import dbUtil.DBInfo;
 
@@ -35,6 +34,7 @@ public class LoginDAO  {
 				if(rs != null) rs.close();
 				if(ps != null) ps.close();
 				if(conn != null) conn.close();
+				
 			}
 			static {
 				try {
@@ -56,7 +56,7 @@ public class LoginDAO  {
 				{
 					
 				conn = getConnect();
-				String query = "SELECT * FROM User WHERE id=?";
+				String query = "SELECT * FROM user WHERE id=?";
 				ps = conn.prepareStatement(query);
 				ps.setString(1, user);
 				rs = ps.executeQuery();

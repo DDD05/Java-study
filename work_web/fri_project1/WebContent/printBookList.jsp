@@ -17,6 +17,12 @@
 	.float-right{
 		float : right;
 	}
+	.table {
+	border: 5px solid black;
+	overflow: hidden;
+	margin-top: 60px;
+	padding: 30px;
+}
 </style>
 </head>
 <body>
@@ -33,47 +39,22 @@
 		<button class="btn btn-outline-dark">검색</button>
 	</div>
 	<table class="table table-bordered">
-				<tr>
-					<td><span style="color: red">＊</span> <span>도서번호</span></td>
-					<td>${book.number}</td>
-				</tr>
-				<tr>
-					<td><span style="color: red">＊</span> <span>도서번호</span></td>
-					<td>${book.title}</td>
-				</tr>
-				<tr>
-					<td><span style="color: red">＊</span> <span>도서종류</span></td>
-					<td>${book.categori}</td>
-				</tr>
-				<tr>
-					<td>* 출판국가</td>
-					<td>
-						${book.from}
-					</td>
-				</tr>
-				<tr>
-					<td>* 출 판 일</td>
-					<td>${book.publishDay}</td>
-				</tr>
-				<tr>
-					<td>* 출 판 사</td>
-					<td>${book.from}</td>
-				</tr>
-				<tr>
-					<td><span style="color: red">＊</span> <span>저 자</span></td>
-					<td>${book.author}</td>
-				</tr>
-				<tr>
-					<td>* 도서가격</td>
-					<td>
-						${book.price}
-					</td>
-				</tr>
-				<tr>
-					<td>* 요약내용</td>
-					<td>${book.desc}</td>
-				</tr>
-			</table>
+		<tr>
+			<th class="table-dark text-center"> 도서번호 </th>
+			<th class="table-dark text-center"> 도서명 </th>
+			<th class="table-dark text-center"> 도서분류 </th>
+			<th class="table-dark text-center"> 저자 </th>
+		</tr>
+		<c:forEach items="${list}" var="item">
+			<tr>
+				<td class="text-center">${item.isbn}</td>
+				<td class="text-center"><a href="#" onclick="location.href='MainServlet?command=printBook&&isbn=${item.isbn}'">
+				${item.title}</a></td>
+				<td class="text-center">${item.catalogue}</td>
+				<td class="text-center">${item.author}</td>
+			</tr>
+		</c:forEach>
+	</table>
 			</div>
 			<div align="center"><c:import url="footer.jsp"></c:import></div>
 </body>

@@ -29,13 +29,13 @@ public class Book {
 		this.description = description;
 		this.publisher = publisher;
 	}
-	public Book(String isbn, String title, String author, int price, String currency) {
+	public Book(String isbn, String title, String author, int price, String description) {
 		super();
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
 		this.price = price;
-		this.currency = currency;
+		this.description = description;
 	}
 	
 	public Book(String isbn, String title, String catalogue, String author) {

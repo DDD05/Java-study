@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbUtil.DBInfo;
+import dbUtil.QueryInfo;
 
 public class BookMgr  {
 	// 싱글톤
@@ -40,29 +41,32 @@ public class BookMgr  {
 		}
 		
 		//비지니스 로직 
-		public void insertBook(Book book) throws SQLException
+		public void insertBook(String id , Book book) throws SQLException
 		{
 			Connection conn = null;
 			PreparedStatement ps = null;
 			try {
 				conn = getConnect();
 				
-				String query = "INSERT INTO"
-						+ " Book(isbn,title,catalogue,nation,publishDate,author,price,currency,description"
-						+ ") VALUES(?,?,?, ?,?,?, ?,?,?)";
+				String query = QueryInfo.insertBook;
 				ps = conn.prepareStatement(query);
 				
 				
 				ps.setString(1, book.getIsbn());
 				ps.setString(2, book.getTitle());
-				ps.setString(3, book.getCatalogue());
+				ps.setString(3, book.getCatalogue());	//
 				ps.setString(4, book.getNation());
 				ps.setString(5, book.getPublishDate());
-				ps.setString(6, book.getAuthor());
-				ps.setInt(7, book.getPrice());
-				ps.setString(8, book.getCurrency());
-				ps.setString(9, book.getDescription());
+				ps.setString(6, book.getPublisher());	//
+				ps.setString(7, book.getAuthor());
+				ps.setInt(8, book.getPrice());
+				ps.setString(9, book.getCurrency());	//
+				ps.setString(10, book.getDescription());
 				System.out.println(ps.executeUpdate() + "행이 추가 되었습니다.");
+				ps = conn.prepareStatement(QueryInfo.userByBook);
+				ps.setString(1, id);
+				ps.setString(2, book.getIsbn());
+				ps.executeUpdate();
 			}finally{
 				try {
 					closeAll(ps,conn);
@@ -72,7 +76,7 @@ public class BookMgr  {
 				}
 			}
 		}
-		public List<Book> search() throws SQLException
+		public List<Book> searchAll(String id) throws SQLException
 		{
 			Connection conn = null;
 			PreparedStatement ps = null;
@@ -83,8 +87,9 @@ public class BookMgr  {
 			{
 				
 			conn = getConnect();
-			String query ="SELECT * FROM Book";
+			String query = QueryInfo.searchBookList;
 			ps = conn.prepareStatement(query);
+			ps.setString(1, id);
 			rs = ps.executeQuery();
 			while(rs.next())
 			{
@@ -121,7 +126,7 @@ public class BookMgr  {
 			{
 				
 			conn = getConnect();
-			String query ="SELECT * FROM Book WHERE title=?";
+			String query ="SELECT * FROM book WHERE title=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, title);
 			rs = ps.executeQuery();
@@ -160,7 +165,7 @@ public class BookMgr  {
 			{
 				
 			conn = getConnect();
-			String query ="SELECT * FROM Book WHERE publisher=?";
+			String query ="SELECT * FROM book WHERE publisher=?";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, publisher);
 			rs = ps.executeQuery();
@@ -199,7 +204,7 @@ public class BookMgr  {
 			{
 				
 			conn = getConnect();
-			String query ="SELECT * FROM Book WHERE price=?";
+			String query ="SELECT * FROM book WHERE price=?";
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, price);
 			rs = ps.executeQuery();
@@ -237,7 +242,7 @@ public class BookMgr  {
 			{
 				
 			conn = getConnect();
-			String query ="SELECT * FROM Book WHERE isbn=?";
+			String query = QueryInfo.searchBookByIsbn;
 			ps = conn.prepareStatement(query);
 			ps.setString(1, isbn);
 			rs = ps.executeQuery();
@@ -272,9 +277,7 @@ public class BookMgr  {
 			try {
 				conn = getConnect();
 				
-				String query = "UPDATE Book"
-						+ "SET title=?,catalogue=?,nation=?,publishDate=?,author=?,price=?,currency=?,description=?"
-						+ "WHERE isbn=?";
+				String query = QueryInfo.updateBook;
 				ps = conn.prepareStatement(query);
 				
 				
@@ -304,7 +307,7 @@ public class BookMgr  {
 			try {
 				conn = getConnect();
 				
-				String query = "DELETE FROM Book WHERE isbn=?";
+				String query = "DELETE FROM book WHERE isbn=?";
 				ps = conn.prepareStatement(query);
 				
 				

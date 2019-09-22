@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Hello world</title>
 <meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,7 +18,7 @@
 .container {
 	border: 10px solid black;
 	overflow: hidden;
-	margin-top: 60px;
+	margin-top: 60px;x
 	padding: 30px;
 }
 .button {
@@ -57,9 +58,9 @@ img {
 					<br>
 					<form id="loginForm" action="MainServlet" method="post">
 						<b>ID</b>
-						<input id="userID" class="form-control" type="text" name="userID">
+						<input id="userID" class="form-control" type="text" name="userID" value="ssafy">
 						<br> <b>PASSWORD</b>
-						<input id="userPwd" class="form-control" type="password" name="userPwd">
+						<input id="userPwd" class="form-control" type="password" name="userPwd" value="1111">
 						<hr>
 						<input name="login" id="login" class="w3-button w3-black w3-round-xxlarge" type="submit" value="login">
 						<input name="command" type="hidden" value="login">
