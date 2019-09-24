@@ -17,19 +17,19 @@
 <body>
 	<br><br>
 	<c:choose>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/update.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/update.jsp'}">
 			<div class="text-center"><h1 class="display-4">도서 수정 화면</h1></div>
 			<p class="text-center"> ${userID.id}님이 로그인 되었습니다.<a href="logoutAction.jsp" >로그아웃</a> </p>
 		</c:when>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/printBookList.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/printBookList.jsp'}">
 			<div class="text-center"><h1 class="display-4">도서 목록 화면</h1></div>
 			<p class="text-center"> ${userID.id}님이 로그인 되었습니다.<a href="logoutAction.jsp">로그아웃</a> </p>
 		</c:when>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/printBook.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/printBook.jsp'}">
 			<div class="text-center"><h1 class="display-4">입력된 도서 정보</h1></div>
 			<p class="text-center"> ${userID.id}님이 로그인 되었습니다.<a href="logoutAction.jsp" >로그아웃</a> </p>
 		</c:when>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/result.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/result.jsp'}">
 			<p class="text-center"> ${userID.id}님이 로그인 되었습니다.<a href="logoutAction.jsp" >로그아웃</a> </p>
 			<div class="text-center"><h1 class="display-4">결과 페이지</h1></div>
 			<p class="text-center"> 정상적으로 저장 되었습니다. </p>

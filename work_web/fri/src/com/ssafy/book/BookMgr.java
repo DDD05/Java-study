@@ -126,7 +126,7 @@ public class BookMgr  {
 			{
 				
 			conn = getConnect();
-			String query ="SELECT * FROM book WHERE title=?";
+			String query ="SELECT * FROM book WHERE title LIKE %?%";
 			ps = conn.prepareStatement(query);
 			ps.setString(1, title);
 			rs = ps.executeQuery();

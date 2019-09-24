@@ -56,9 +56,27 @@ public class MainServlet extends HttpServlet {
 		case "remove":
 			path = remove(request);
 			break;
+		case "search":
+			search(request);
+			break;
 		}
 		
 		request.getRequestDispatcher(path).forward(request, response);
+	}
+	private String search(HttpServletRequest request)
+	{
+		String by = request.getParameter("by");
+		String byValue = request.getParameter("byValue");
+		ArrayList<Book> list = new ArrayList<>();
+		try {
+			list = (ArrayList<Book>) BookMgr.getInstance().searchByTitle(byValue);
+		} catch (NumberFormatException e) {
+			System.out.println(e);
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		request.setAttribute("list", list);
+		return "printBookList.jsp";
 	}
 	private String remove(HttpServletRequest request)
 	{

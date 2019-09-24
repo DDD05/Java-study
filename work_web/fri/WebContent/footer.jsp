@@ -17,16 +17,16 @@
 <body>
 	<br>
 	<c:choose>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/printBookList.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/printBookList.jsp'}">
 		<a href="inputForm.jsp">도서 등록</a>&nbsp;&nbsp;&nbsp;<a href="main.jsp">메인 페이지</a>
 		</c:when>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/printBook.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/printBook.jsp'}">
 		<a href="#" onclick="location.href='MainServlet?command=printAll'">도서 목록 돌아가기</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='MainServlet?command=remove&&isbn=${book.isbn}'">도서삭제</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='MainServlet?command=updatePage&&isbn=${book.isbn}'">도서수정</a>
 		</c:when>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/result.jsp'}">
+		<c:when test="${pageContext.request.requestURI eq '/fri/result.jsp'}">
 		<a href="inputForm.jsp">추가 등록</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='MainServlet?command=printAll'">도서 목록</a>
 		</c:when>
-		<c:when test="${pageContext.request.requestURI eq '/fri_project1/main.jsp'}" >
+		<c:when test="${pageContext.request.requestURI eq '/fri/main.jsp'}" >
 		<a href="inputForm.jsp">도서 등록</a>&nbsp;&nbsp;&nbsp;<a href="#" onclick="location.href='MainServlet?command=printAll'">도서 목록</a>
 		</c:when>
 		<c:otherwise>
