@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="Product">
+	<insert id="addProduct" parameterType="product">
+	INSERT
+	INTO myproduct(name,maker,price)
+	VALUES(#{name}, #{maker}, #{price})
+	</insert>
+	
+	<select id="getUserList" parameterType="product" resultType="product">
+	SELECT *
+	FROM myproduct
+	</select>
+	
+	<select id="searchProductByName" parameterType="product" resultType="product">
+	SELECT *
+	FROM myproduct
+	WHERE name = #{name}
+	</select>
+	
+	<delete id="deleteProductByName" parameterType="product">
+	DELETE
+	FROM myproduct
+	WHERE name = #{name}
+	</delete>
+	
+	<update id="updateProduct" parameterType="product">
+	UPDATE myproduct
+	SET maker=#{maker}
+	WHERE name=#{name}
+	</update>
+</mapper>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
