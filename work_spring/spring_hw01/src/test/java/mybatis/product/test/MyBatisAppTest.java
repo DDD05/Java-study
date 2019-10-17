@@ -46,6 +46,9 @@ public class MyBatisAppTest {
 		System.out.println("1 :: 상품이 " + obj + " 등록 되었습니다. ");
 		System.out.println();
 		
+		// 객체에 데이터가 모두 들어갔는지 확인용 
+		System.out.println(product);
+		
 		// 2) 등록된 모든 상품정보 출력하기
 		System.out.println("2) 상품 등록");
 		List<MyProductVO> list = session.selectList("Product.getUserList");
