@@ -1,3 +1,8 @@
+### ** 디비 
+https://www.notion.so/donaldd/DB-139f911c9d174e508c39778c87b8426c
+### ** web 
+https://www.notion.so/donaldd/Web-5b67c68082f84c79bea2251361c118ca
+
 # 자바 (Java)
 
 1. **Java SE 파일 경로**
