@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import com.ssafy.dao.BookDAOImpl;
 import com.ssafy.model.BookVO;
 
 public class BookJUnitTest 
@@ -20,27 +21,30 @@ public class BookJUnitTest
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
 		SqlSession sqlSession = factory.openSession();
 		
-		BookVO book = new BookVO("77777-1231-1234", "C언어 함께 춤을", "댄싱", "한국", "2019-10-23", "2019-10-24", "돼에지", "1000", "너무너무 재미있당~");
+		BookVO book = new BookVO("3-3-3", "DDD 함께 노래를", "댄싱", "한국", "2019-10-23", "2019-10-24", "돼에지", 1000,"원", "너무너무 재미있당~");
 
-		//findBookByTitle test ok
+		
+		//deleteBook test ok
+//		sqlSession.delete("BookMapper.deleteBook","2-2-2");
+//		sqlSession.commit();
+		
+		//updateBook test ok
+//		sqlSession.update("BookMapper.updateBook",book);
+//		sqlSession.commit();
+		
+//		//addBook test ok
+//		int result = sqlSession.insert("bookMapper.addBook",book);
+//		sqlSession.commit();
+//		System.out.println("result : " + result);
+//		
+//		//findBookByTitle test ok
 //		List<BookVO> list = sqlSession.selectList("bookMapper.findBookByTitle","Java");
 //		for(BookVO b : list)
 //			System.out.println(b);
 		
-		//deleteBook test
-		
-		
-		//updateBook test
-		
-		
-		//addBook test
-		int result = sqlSession.insert("bookMapper.addBook",book);
-		sqlSession.commit();
-		System.out.println("result : " + result);
-		
 		// findAllBook test ok
-//		List<BookVO> list = sqlSession.selectList("bookMapper.findAllBook");
-//		for(BookVO b : list)
-//			System.out.println(b);
+		List<BookVO> list = sqlSession.selectList("BookMapper.findAllBook");
+		for(BookVO b : list)
+			System.out.println(b);
 	}
 }

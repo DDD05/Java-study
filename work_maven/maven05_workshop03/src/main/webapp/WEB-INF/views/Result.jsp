@@ -17,7 +17,7 @@
 	<table class="table table-bordered">
 				<tr>
 					<td><span style="color: red">＊</span> <span>도서번호</span></td>
-					<td>${book.number}</td>
+					<td>${book.isbn }</td>
 				</tr>
 				<tr>
 					<td><span style="color: red">＊</span> <span>도서번호</span></td>
@@ -25,21 +25,21 @@
 				</tr>
 				<tr>
 					<td><span style="color: red">＊</span> <span>도서종류</span></td>
-					<td>${book.categori}</td>
+					<td>${book.catalogue}</td>
 				</tr>
 				<tr>
 					<td>* 출판국가</td>
 					<td>
-						${book.from}
+						${book.nation}
 					</td>
 				</tr>
 				<tr>
 					<td>* 출 판 일</td>
-					<td>${book.publishDay}</td>
+					<td>${book.publishDate}</td>
 				</tr>
 				<tr>
 					<td>* 출 판 사</td>
-					<td>${book.from}</td>
+					<td>${book.publisher}</td>
 				</tr>
 				<tr>
 					<td><span style="color: red">＊</span> <span>저 자</span></td>
@@ -48,12 +48,12 @@
 				<tr>
 					<td>* 도서가격</td>
 					<td>
-						${book.price}
+						${book.price}&nbsp;${book.currency}
 					</td>
 				</tr>
 				<tr>
 					<td>* 요약내용</td>
-					<td>${book.desc}</td>
+					<td>${book.description}</td>
 				</tr>
 			</table>
 			</div>

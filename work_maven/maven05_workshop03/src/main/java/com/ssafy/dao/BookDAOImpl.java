@@ -11,22 +11,23 @@ import com.ssafy.model.BookVO;
 @Repository
 public class BookDAOImpl implements BookDAO
 {
+	String ns = "BookMapper.";
 	@Autowired
 	SqlSession sqlSession;
 	
 	@Override
 	public void addBook(BookVO book) throws Exception {
-		sqlSession.insert("bookMapper.addBook",book);
+		sqlSession.insert(ns + "addBook",book);
 	}
 
 	@Override
 	public List<BookVO> findAllBook() throws Exception {
-		return sqlSession.selectList("bookMapper.findAll");
+		return sqlSession.selectList(ns + "findAll");
 	}
 
 	@Override
 	public List<BookVO> findBookByTitle(String name) throws Exception {
-		return sqlSession.selectList("bookMapper.findBookByTitle",name);
+		return sqlSession.selectList(ns + "findBookByTitle",name);
 	}
 
 }

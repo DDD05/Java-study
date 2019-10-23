@@ -3,42 +3,46 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="bookMapper">
+<mapper namespace="BookMapper">
 	<insert id="addBook" parameterType="bookVO"> 
 		INSERT INTO 
 		book(
 			isbn
 			,title
-			,categori
+			,catalogue
 			,nation
-			,publish_day
+			,publishDate
 			,publisher
 			,author
 			,price
+			,currency
 			,description
 		)
 		VALUES(
 			#{isbn}
 			,#{title}
-			,#{categori}
+			,#{catalogue}
 			,#{nation}
-			,#{publishDay}
+			,#{publishDate}
 			,#{publisher}
 			,#{author}
 			,#{price}
+			,#{currency}
 			,#{description}
 		)
 	</insert>
 	
 	<sql id="selectAllAttr">
-		SELECT isbn
+		SELECT 
+			isbn
 			,title
-			,categori
+			,catalogue
 			,nation
-			,publish_day
+			,publishDate
 			,publisher
 			,author
 			,price
+			,currency
 			,description
 		FROM book
 	</sql>
@@ -65,12 +69,13 @@
 		UPDATE book
 		SET
 			title = #{title}
-			,categori = #{categori}
+			,catalogue = #{catalogue}
 			,nation = #{nation}
-			,publish_day = #{publishDay}
+			,publishDate = #{publishDate}
 			,publisher = #{publisher}
 			,author = #{author}
 			,price = #{price}
+			,currency = #{currency}
 			,description = #{description}
 		WHERE isbn = #{isbn}
 	</update>

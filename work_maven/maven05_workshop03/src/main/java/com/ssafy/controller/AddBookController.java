@@ -18,9 +18,22 @@ public class AddBookController
 	BookService bookService;
 	
 	@RequestMapping("addBook.do")
-	public ModelAndView execute(HttpServletRequest request, HttpServletResponse respose, BookVO book) throws Exception
+	public ModelAndView execute(HttpServletRequest request, HttpServletResponse respose) throws Exception
 	{
+		String isbn = "";
+		isbn += request.getParameter("firstTel") + "-" + request.getParameter("midTel") + "-" + request.getParameter("lastTel");
+		String title = request.getParameter("title");
+		String catalogue = request.getParameter("catalogue");
+		String nation = request.getParameter("nation");
+		String publishDate = request.getParameter("publishDate");
+		String publisher = request.getParameter("publisher");
+		String author = request.getParameter("author");
+		int price = Integer.parseInt(request.getParameter("price"));
+		String currency = request.getParameter("currency");
+		String description = request.getParameter("description");
+		BookVO book = new BookVO(isbn,title,catalogue,nation,publishDate,publisher,author,price,currency,description);
+		
 		bookService.addBook(book);
-		return new ModelAndView("views/Result","book",	book);
+		return new ModelAndView("Result","book",book);
 	}
 }

@@ -1,38 +1,16 @@
 package  com.ssafy.model;
 
 public class BookVO {
-	public String isbn;
-	public String title;
-	public String categori;
-	public String nation;
-	public String publishDay;
-	public String publisher;
-	public String author;
-	public String price;
-	public String description;
-	public BookVO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public BookVO(String isbn, String title, String categori, String nation, String publishDay, String publisher,
-			String author, String price, String description) {
-		super();
-		this.isbn = isbn;
-		this.title = title;
-		this.categori = categori;
-		this.nation = nation;
-		this.publishDay = publishDay;
-		this.publisher = publisher;
-		this.author = author;
-		this.price = price;
-		this.description = description;
-	}
-	@Override
-	public String toString() {
-		return "BookVO [isbn=" + isbn + ", title=" + title + ", categori=" + categori + ", nation=" + nation
-				+ ", publishDay=" + publishDay + ", publisher=" + publisher + ", author=" + author + ", price=" + price
-				+ ", description=" + description + "]";
-	}
+	private String isbn;
+	private String title;
+	private String catalogue;
+	private String nation;
+	private String publishDate;
+	private String publisher;
+	private String author;
+	private int price;
+	private String currency;
+	private String description;
 	public String getIsbn() {
 		return isbn;
 	}
@@ -45,11 +23,11 @@ public class BookVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getCategori() {
-		return categori;
+	public String getCatalogue() {
+		return catalogue;
 	}
-	public void setCategori(String categori) {
-		this.categori = categori;
+	public void setCatalogue(String catalogue) {
+		this.catalogue = catalogue;
 	}
 	public String getNation() {
 		return nation;
@@ -57,11 +35,11 @@ public class BookVO {
 	public void setNation(String nation) {
 		this.nation = nation;
 	}
-	public String getPublishDay() {
-		return publishDay;
+	public String getPublishDate() {
+		return publishDate;
 	}
-	public void setPublishDay(String publishDay) {
-		this.publishDay = publishDay;
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
 	}
 	public String getPublisher() {
 		return publisher;
@@ -75,17 +53,47 @@ public class BookVO {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "BookVO [isbn=" + isbn + ", title=" + title + ", catalogue=" + catalogue + ", nation=" + nation
+				+ ", publishDate=" + publishDate + ", publisher=" + publisher + ", author=" + author + ", price="
+				+ price + ", currency=" + currency + ", description=" + description + "]";
+	}
+	public BookVO(String isbn, String title, String catalogue, String nation, String publishDate, String publisher,
+			String author, int price, String currency, String description) {
+		super();
+		this.isbn = isbn;
+		this.title = title;
+		this.catalogue = catalogue;
+		this.nation = nation;
+		this.publishDate = publishDate;
+		this.publisher = publisher;
+		this.author = author;
+		this.price = price;
+		this.currency = currency;
+		this.description = description;
+	}
+	public BookVO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }
