@@ -16,6 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- 라이브러리 빈 등록 -->
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
@@ -24,9 +25,9 @@
 	<!-- my bean 등록 -->
 	<beans:bean name="/main.do" class="com.ssafy.spring.controller.HelloController"/>
 	<beans:bean name="/form.do" class="com.ssafy.spring.controller.FormController"/>
+	<!-- my bean 등록  end-->
 	
-	<context:component-scan base-package="com.ssafy.spring" /> 
 	
-	
+	<context:component-scan base-package="com.ssafy.spring" />
 	
 </beans:beans>

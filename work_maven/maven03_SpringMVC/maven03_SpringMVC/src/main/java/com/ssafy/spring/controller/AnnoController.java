@@ -5,11 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AnnoController
-{
+public class AnnoController {
 	@RequestMapping("/anno.do")
-	public ModelAndView anno()
-	{
-		return new ModelAndView("anno_result", "info", "annotation이 좋탕~!");
+	public ModelAndView anno() {
+		return new ModelAndView("anno_result","info","Annotation 이 좋아?");
 	}
 }

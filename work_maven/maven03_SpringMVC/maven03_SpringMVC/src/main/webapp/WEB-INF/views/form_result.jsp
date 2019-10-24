@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2 alalign="center"> === Spring MVC Framework First Sample === </h2>
-	<a href="main.do">DispatcherServlet gogogo</a>
+	${info}
 </body>
 </html>

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>${info }</h2>
+	<h2 align="center">==Spring mvc framework first sample ==</h2>
+	<a href="main.do">Dispatcher Servlet gogo</a>
 </body>
 </html>
