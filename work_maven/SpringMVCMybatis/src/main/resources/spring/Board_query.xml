@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	
+<mapper namespace="sql.board">
+
+	<sql id="select-all-board">
+		SELECT 
+			no,
+			id,
+			title,
+			contents
+		FROM
+			board
+	</sql>
+
+	<!-- 게시판 글 입력 -->
+	<insert id="insert"	parameterType="board" useGeneratedKeys="true" keyProperty="no">
+		insert into board(id, title, contents)
+		values( #{id},#{title},#{contents} )
+	</insert>
+	
+	
+	<!-- 상세 글 보기 -->
+	<select id="viewContent" parameterType="board" resultType="board">
+		<include refid="select-all-board"/>
+		<choose>
+			<when test="#{no} != null">
+				WHERE no = #{no}
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 전체 글보기 -->
+	<select id="getAll" resultType="board">
+		<include refid="select-all-board"/>
+	</select>
+	
+	
+</mapper>
+
+
+
+
+
+
