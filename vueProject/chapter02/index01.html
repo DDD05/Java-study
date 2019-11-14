@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='vue.js'></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div><h3>{{title | toH3 }}</h3></div>
+        <div><h3>{{title | toUpper }}</h3></div>
+        <div><h3>{{title | toLower }}</h3></div>
+        <p>=========================================</p>
+        <div v-if="hasResultA()"><h3>{{title | toH3}}</h3></div>
+    </div>
+</body>
+</html>
+<!-- 
+                                               Filters
+                        filters :: data를 가공해서 원하는 문자열로 필터링하는데 사용
+                        
+                        (사용 예시) 
+                        사원 emp table에서 $의 경우 소수점 두자리까지 보여주고 싶을때 filtering 자주
+                        사용한다.
+ -->
+<script>
+
+    var model = {title:"ssafy"}
+    var app = new Vue({
+        el : "#app",
+        data : model,
+        filters :{
+            toH3(value){
+                var s = "";
+                for( i = 0 ; i < 3 ; i++)
+                {
+                    s += value
+                }
+                return s;
+            },
+            toUpper(val){
+                return val.toUpperCase();
+            },
+            toLower(v) { return v.toLowerCase();}
+        },
+        methods: {
+            // 오버로딩이 안먹힌다 .  :: key로 바인딩되는데 key는 유일하기 때문인듯
+            hasResultA : function(){
+                console.log("no param");
+                return this.title.length > 10;
+            },
+            hasResultA : function(val){
+                console.log("get param");
+                return this.title.length > 10;
+            }
+        },
+        computed: {
+            hasResult : function(){
+                console.log(this.title.length);
+                return this.title.length > 10;
+            }
+        },
+    })
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul v-for="(item, index) in pages" :key="index">
+        <!-- 현재 클리한 버튼의 페이를 model쪽으로 할당-->
+        <button v-on:click="clickEvent(index)">{{item}}</button>
+      </ul>
+
+      <hr />
+      <!-- 현재 돌고있는 페이지가 dpage랑 동일한 페이지만 출력되도록-->
+      <h1 id="page"> xxx </h1>
+
+    </div>
+  </body>
+</html>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      pages: ["page1", "page2", "page3", "page4"]
+    },
+    methods: {
+      clickEvent : function(idx){
+        alert(idx+1)
+        var pageContent = document.getElementById("page")
+        console.log(pageContent);
+        
+        pageContent.innerHTML = this.pages[idx];
+      }
+    }
+  });
+</script>

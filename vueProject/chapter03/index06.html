@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>{{"초기값 : " + count}}</h2>
+      <h2 v-once>{{"현재값 : " + count}}</h2>
+      <button @click="count++">+</button>
+    </div>
+  </body>
+</html>
+
+<script>
+  var model = { count: 1 };
+  setInterval(() => {
+    if(app.count >= 1000) app.count = 1;
+    app.count++;
+  }, 1);
+
+  var app = new Vue({
+    el: "#app",
+    data: model
+  });
+
+</script>

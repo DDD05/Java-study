@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{num}}</h1>
+        <button @click="plus()">plus</button>
+    </div>
+</body>
+</html>
+
+<script>
+
+    var model = {
+        title : "ssafy",
+        num : 0
+    }
+
+    var app = new Vue({
+        el : "#app",
+        data : model,
+        beforeCreate() {
+            console.log("---------------------before create-------------------");
+            console.log("beforeCreate ...." + this.title);
+            console.log("----------------------------------------------------");
+        },
+        created() {
+            console.log("---------------------created create-------------------");
+            console.log("created ...." + this.title);
+            console.log(this);
+            console.log("create에 연결된 html DOM 엘리먼트 :: " + this.$el);
+            console.log("----------------------------------------------------");
+        },
+        mounted() {
+            console.log("---------------------mounted create-------------------");
+            console.log("mounted ...." + this.title);
+            console.log("----------------------------------------------------");
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate title .... call ....');
+        },
+        updated() {
+            console.log('updated title .... call ....');
+        },
+        methods: {
+            plus : function(){
+                return this.num++;
+            }
+        },
+    })
+
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="vue.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 v-if="visible">나는 Vue 입니다</h1>
+      <!-- 주석처리 됩니당.. -->
+      <!--
+        아주 복잡하고 오래 걸리는 로직을 처리할때는 이부분의 내용이 보이지 않을뿐더러
+        내용조차 어리하지 않는다 ... false일 경우 
+      -->
+      <h1 v-show="visible">나는 Vue 입니다</h1>
+      <!-- <h1 stlye="display : none" -->
+    </div>
+  </body>
+</html>
+
+<script>
+  var app = new Vue({
+    el: "#app",
+    date: {
+      visible: false
+    }
+  });
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+    <style>
+        .commmon{
+            margin: 0 auto;
+            text-align: center;
+            font-family: serif;
+            font-size: 20px;
+        }
+        .sat{
+            color: blueviolet;
+            border-style: dotted;
+        }
+        .sun{
+            color: rgb(235, 100, 11);
+            border-style: solid 54;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="commmon" :class="{sat : isSat, sun : isSun}">토요일</div>
+        <div class="commmon" :class="{sat : !isSat, sun : !isSun}">토요일 아니다</div>
+        <div class="commmon" :class="{sat : !isSat, sun : isSun}">일요일</div>
+        <div class="commmon" :class="{sat : !isSat, sun : !isSun}">일요일 아니다</div>
+    </div>
+</body>
+</html>
+
+<script>
+
+
+    var model = {isSat : true , isSun : true}
+    var app = new Vue({
+        el : "#app",
+        data : model,
+    })
+</script>

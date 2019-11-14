@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js"></script>
+  <title>Document</title>
+  <style>
+    table {
+      margin:0px auto;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<h1>ffff</h1>
+<body>
+  <div id="app">
+    <ul>
+      {{numbers}}
+      <li v-for="n in numbers">{{n}}</li>
+    </ul>
+    <hr>
+    <table border="2" style="background-color:black; color:aliceblue; text-align: center;" > 
+      <thead style="background-color:red;">
+        <tr >
+          <th>이름</th><th>나이</th>
+        </tr>
+      </thead>      
+      <tbody>
+        <tr v-for="person in people">
+          <td>{{person.name}}</td>
+          <td>{{person.age}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </n in numbn />
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        numbers: ["a", "b", "c", "d", "f", "g", "32132"],
+        people :[ 
+          { name : "아이유" , age : 27  } ,
+          { name : "전현무" , age : 47  } ,
+          { name : "허재" , age : 57  } 
+        ]
+      },
+    })
+  </script>

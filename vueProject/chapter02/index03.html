@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="first">
+        <div v-html="title"></div>
+    </div>
+    <div id="second">
+        <input @key:enter="hello2()" type="text" v-model="input">
+        <button @click="hello2()">I am btn</button>
+    </div>
+</body>
+</html>
+
+<script>
+    var model = {title : "<h2>SSAFY</h2>"}
+    var first = new Vue({
+        el : "#first",
+        data : model,
+        methods: {
+            hello : function(value){
+                console.log(value);
+                this.title = value;
+                alert(this.title);
+            }
+        },
+    })
+    var second = new Vue({
+        el : "#second",
+        data : { input : "" },
+        methods: {
+            hello2 : function(){
+                console.log(this.input);
+                return alert(this.input)
+            }
+        },
+    })
+</script>

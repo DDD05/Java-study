@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SSAFY</title>
+    <style>
+      body {
+        background-color: #ffffff;
+      }
+
+      #second > h2 {
+        margin: auto;
+        padding: 0px;
+        text-align: center;
+        color: blue;
+      }
+
+      .red {
+        color: red;
+      }
+
+      #checkboxArea1 {
+        width: 70%;
+        height: 30px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+        font-family: serif;
+        font-size: 14px;
+      }
+
+      #checkboxArea2 {
+        width: 70%;
+        height: 30px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+        font-family: serif;
+        font-size: 14px;
+        color: red;
+      }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+
+  <body>
+    <div id="second">
+      <h2>SSAFY SAFE FOOD</h2>
+    </div>
+    <div id="app">
+      <fieldset id="checkboxArea1">
+        <legend>알레르기 체크</legend>
+        <label v-for="(item, index) in allergen" :key="index">
+          {{item}}<input type="checkbox" name="box" :value="item" v-model="target" />
+        </label>
+      </fieldset><br>
+      <fieldset v-if="isLen">
+        <p>내가 선택한 알러지 ....</p>
+        <span>{{target}}</span>
+      </fieldset><br>
+      <button @click="allergen.reverse() | target.reverse()">버어튼</button>
+    </div>
+    <script type="text/javascript">
+      var model = {
+        allergen: [
+          "대두",
+          "땅콩",
+          "우유",
+          "게",
+          "새우",
+          "돼지고기",
+          "소고기",
+          "연어",
+          "민들레",
+          "쑥",
+          "계란흰자"
+        ],
+        target : []
+      };
+      var allergenes1 = new Vue({
+        el: "#app",
+        data: model,
+        computed: {
+          isLen: function() {
+            return this.target.length > 0;
+          }
+        }
+      });
+      Vue.config.devtools = true;
+    </script>
+  </body>
+</html>

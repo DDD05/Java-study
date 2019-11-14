@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h2>INTERNATIONAL FLAGS</h2>
+      <table>
+        <tr>
+          <td>나라이름1</td>
+          <td>나라이름2</td>
+          <td>나라국기</td>
+        </tr>
+        <tr v-for="f in flags">
+          <td v-html="f.name"></td>
+          <td v-html="f.korname"></td>
+          <td><img :src="f.flag" alt=""></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
+
+<script>
+  var model = {
+    flags: [
+      {
+        name: "Ghana",
+        korname: "가나",
+        flag:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Flag_of_Ghana.svg/44px-Flag_of_Ghana.svg.png"
+      },
+      {
+        name: "South Korea",
+        korname: "대한민국",
+        flag:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/44px-Flag_of_South_Korea.svg.png"
+      }
+    ]
+  };
+
+  var app = new Vue({
+      el:"#app",
+      data : model
+  })
+</script>

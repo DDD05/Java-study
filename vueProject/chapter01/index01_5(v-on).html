@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>이벤트</title>
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="addDate">증가</button>
+      <input id="captureText" type="text" v-on:keyup.enter="capture()" v-model="fruit" />
+      <ul>
+        <li v-for="fruit in fruits" v-if="fruit.length >= 6">{{fruit}}</li>
+      </ul>
+    </div>
+  </body>
+</html>
+
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      numbers: [0, 1, 2, 3],
+      fruits: ["Apple", "Banana", "Orange", "Grape"],
+      fruit:''
+    },
+    methods: {
+      addDate: function() {
+        var lastIdx = this.numbers[this.numbers.length - 1];
+        // console.log(lastIdx);
+        this.numbers.push(lastIdx + 1);
+      },
+      capture: function(){
+        if(this.fruit){ //값이 있다면 무조건 true;
+          this.fruits.push(this.fruit)
+        }
+        //var content = document.getElementById('captureText').value;
+        // console.log(this.numbers.length)
+        // this.numbers.push(this.numbers.length);
+      }
+    }
+  });
+</script>
+
+
+<!--
+
+  new Vue({
+    el: '#app',
+    // 정적인 테이타 처리
+    data : {},
+
+    //동적인 데이타 처리
+    data {}{
+      return
+    },
+
+    method : {
+      xxx : function(){
+
+      }
+    }
+  })
+
+
+  v-model 
+  v-if="",v-else|v-show
+  v-on:click
+  v-text,
+  v-html,
+  v-for="a in aaa",
+  {{}}
+-->

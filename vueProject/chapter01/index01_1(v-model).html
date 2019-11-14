@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- 1. 라이브러리 -->
+    <script src="vue.js"></script>
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <!--2. 화면(영역) 구성-->
+    <div class="app">
+      Message :: <input v-html="message" type="text" /><br />
+      <!-- Message :: <input="text"><br> -->
+      {{ message.title }}
+      <!-- 문자보관법 :: 머쉬타시 표현법 :: 단방향 데이타 -->
+    </div>
+    <div class="app">
+      아래 : <input v-model="message" type="text" />
+    </div>
+  </body>
+</html>
+
+<!--3. Vue 객체 생성-->
+<script>
+  var model = {title : '<h2>SSAFY VUE</h2>'}
+  var app = new Vue({
+    el: ".app",
+    data: {
+      message: model
+    }
+  });
+</script>

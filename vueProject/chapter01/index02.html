@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.common.dev.js'></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>{{showVue()}}</div>
+    <div>{{showMyVue("ssafy")}}</div>
+    <button @click="changeMyVue()" v-html="title">{{title}}</button>
+    <button @click="changeMyVue" v-html="title">{{title}}</button>
+  </div>
+</body>
+</html>
+<script>
+  var model = { title : "<h2>SSAFY VUE</h2>"}
+  var app = new Vue({
+    el:"#app",
+    data:model,
+    methods: {
+      /*
+                  javascript
+                  1) var showVue = function(){} : 익명함수
+                  2) function showVue(){} : 선언적 함수
+                  3) 뷰에서는 함수이름 : function(){}
+      */
+      showVue : ()=>{
+        return "ssafy vue" + new Date();
+      },
+      showMyVue : (name,$event)=>{
+        return  name+" "+new Date();
+      },
+      changeMyVue : ()=>{
+        return "ssafy vue ssafy vue";
+        // this.$data.title  :: original
+        // app.title ::  변수 객체 접근
+        // this.title :: 현 객체 접근
+      }
+    },
+  })
+</script>

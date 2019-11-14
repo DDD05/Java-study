@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SSAFY</title>
+  <style>
+body {background-color: #ffffff;}
+#second  > h2 { margin:auto; padding:0px; text-align:center; color: blue;}	
+.red {color: red;}
+#checkboxArea1{width:70%;height:30px; margin:auto; padding:20px; text-align:center; font-family: serif; font-size: 14px;}
+#checkboxArea2{width:70%;height:30px; margin:auto; padding:20px; text-align:center; font-family: serif; font-size: 14px;color: red; }
+</style>
+   <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id='second'>
+    <h2>SSAFY SAFE FOOD</h2>
+  </div>
+  <div id='app'>
+    <fieldset id="checkboxArea1">
+        <legend>알레르기 체크</legend>
+        <label><input type="checkbox" name="box" value="대두" v-model="allergen"/>대두</label>
+        <label><input type="checkbox" name="box" value="땅콩" v-model="allergen" />땅콩</label>
+        <label><input type="checkbox" name="box" value="우유" v-model="allergen"/>우유</label>
+        <label><input type="checkbox" name="box" value="게"  v-model="allergen"/>게</label>
+        <label><input type="checkbox" name="box" value="새우" v-model="allergen"/>새우</label>
+        <label><input type="checkbox" name="box" value="참치" v-model="allergen" />참치</label>
+        <label><input type="checkbox" name="box" value="연어" v-model="allergen"/>연어</label>
+        <label><input type="checkbox" name="box" value="쑥"  v-model="allergen" />쑥</label>
+        <label><input type="checkbox" name="box" value="소고기"  v-model="allergen"/>소고기</label>
+        <label><input type="checkbox" name="box" value="닭고기" v-model="allergen" />닭고기</label>
+        <label><input type="checkbox" name="box" value="돼지고기"  v-model="allergen"/>돼지고기</label>
+        <label><input type="checkbox" name="box" value="복숭아" v-model="allergen"/>복숭아</label>
+        <label><input type="checkbox" name="box" value="민들레" v-model="allergen"/>민들레</label>
+        <label><input type="checkbox" name="box" value="계란흰자" v-model="allergen" />계란흰자</label>
+    </fieldset>
+    <fieldset v-if="isLen">
+        <p>내가 선택한 알러지 ....</p>
+        <span>{{allergen}}</span>
+
+    </fieldset>
+    
+
+  </div>
+  <script type="text/javascript">
+ var model = {
+      allergen : []
+ };
+ var allergenes1 = new Vue({
+    el : "#app",
+    data : model,
+    computed: {
+      isLen : function(){
+        return this.allergen.length > 0;
+      }
+    },
+ });
+ Vue.config.devtools = true;
+ </script>
+</body>
+</html>

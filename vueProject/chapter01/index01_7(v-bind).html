@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <style>
+      button{
+        background: white;
+        border : 1px solid gray;
+        margin : 0 auto;
+        cursor: pointer;
+      }
+      button.active{
+        background: red;
+        color: white;
+        border:pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 버튼이 클릭될때 class 스타일쉬트 속성을 동적으로 추가함 -->
+      <button v-for="page in pages" v-on:click="dpage=page" v-bind:class="{'active' : dpage===page}">{{page}}</button>
+      <hr>
+      <!-- 현재 돌고있는 페이가 dpage랑 동일한 페이지만 출력되도록 -->
+      <div v-for="page in pages" v-if="page===dpage">
+        <p>{{page}}</p>
+        <img v-bind:src="'img/'+page+'.png'" alt="noContent">
+      </div>
+    </div>
+    <hr>
+  </body>
+</html>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      pages: ["page1", "page2", "page3", "page4"],
+      dpage : ''
+    }
+  });
+</script>

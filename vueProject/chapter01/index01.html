@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    
+  </head>
+  <body>
+    <div id="app">
+      <div>{{model.title}}</div>
+      <div v-text="model.title"></div> <!-- jquery의 text()-->
+      <div v-html="model.title"></div> <!-- jquery의 html()-->
+      <a :[object.attr]="object.url">naver</a>
+    </div>
+  </body>
+</html>
+
+<!-- ready에 넣으면 위에 넣는거 쌉가능 -->
+<script>
+  var obj = { attr : "href" , url : "https://www.naver.com" }
+  var mdl = { title : '<h2>SSAFY VUE</h2>'};
+  var app = new Vue({
+    el : "#app",
+    data : {
+      model : mdl,
+      object : obj
+    }
+  })
+</script>
