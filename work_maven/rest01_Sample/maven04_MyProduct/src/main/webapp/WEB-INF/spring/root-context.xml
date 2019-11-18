@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<!-- classpath를 반드시 넣어줘야 한다. -->
+	<context:property-placeholder
+		location="classpath:mybatis/jdbc.properties" />
+
+	<!-- 1. DataSource빈 등록 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.mysql.driver}" />
+		<property name="url" value="${jdbc.mysql.url}" />
+		<property name="username" value="${jdbc.mysql.username}" />
+		<property name="password" value="${jdbc.mysql.password}" />
+	</bean>
+
+	<!-- 2. SqlSessionFactory 빈 등록 -->
+	<bean id="sqlSessionFactoryBean"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:mybatis/SqlMapConfig.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 3. SqlSession 빈 등록 -->
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean" />
+	</bean>
+
+	<!-- 4. DAOImpl 빈 등록 -->
+<!-- 	
+	<bean id="myBatisUserDAOImpl12"
+		class="ibatis.services.user.impl.MyBatisUserDAOImpl">
+		<property name="sqlSession" ref="sqlSessionTemplate" />
+	</bean>
+ -->
+ 
+	<!-- 5. ServiceImpl 빈 등록 -->
+ <!--
+ 	<bean id="myBatisUserServiceImpl12"
+		class="ibatis.services.user.impl.MyBatisUserServiceImpl12">
+		<property name="userDAO" ref="myBatisUserDAOImpl12" />
+	</bean>
+ -->
+	<context:component-scan base-package="com.ssafy" /> 
+ 
+</beans>
