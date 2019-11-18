@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SSAFY</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+      #second>h2{margin : 0 auto; padding : 0px ; text-align: center ; color: blue;}
+      [v-cloak]{
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="second">
+      <h2>SAFY HRM</h2>
+    </div>
+    <div id="signup_section">
+      <form action="#" method="post" @submit.prevent="addEmp()" >
+        아이디*
+        <input
+          id="_signId"
+          name="id"
+          type="text"
+          placeholder="아이디를 입력하세요"
+          v-model ="id"
+        /><br />
+        비밀번호*
+        <input
+          id="_signPw"
+          name="pw"
+          type="password"
+          v-model="pw"
+          placeholder="패스워드를 입력하세요"
+        /><br />
+        <button type="submit" name="button">사원추가</button>
+      </form>
+      <table>
+        <tr>
+          <th>사원번호</th>
+          <th>아이디</th>
+          <th>비밀번호</th>
+        </tr>
+        <tbody>
+          <tr v-for="(e,idx) in emp_list" :key="e.id">
+            <td :style="tablestyle">{{idx+1}}</td>
+            <td :style="tablestyle">{{e.id}}</td>
+            <td :style="tablestyle">{{e.pw}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br /><br />
+      <h2>사원 찾기</h2>
+      <input type="number" @keyup.enter="findEmployee()"/>
+      <h3 v-cloak>아이디 : {{emp.id}}</h3>
+      <h3 v-cloak>패스워드 : {{emp.pw}}</h3>
+    </div>
+  </body>
+</html>
+
+<script>
+
+  var model = {
+    tablestyle:{
+      border : "1px solid green",
+      width : "10px"
+    },
+    id:"",
+    pw:"",
+    emp:{id:"",pw:""},
+    emp_list:[]
+  }
+
+  var signup_section = new Vue({
+    el : "#signup_section",
+    data : model,
+    methods: {
+      addEmp:function(){
+        if(this.id && this.pw){
+          this.emp_list.push({
+            id : this.id,
+            pw : this.pw
+          })
+          this.id=""
+          this.pw=""
+        }//if
+        else alert("id 를 입력하세요")
+      }//addEmp
+      ,findEmployee: function($event){
+        if(this.emp_list[event.target.value-1]){
+          this.emp.id = this.emp_list[event.target.value-1].id;
+          this.emp.pw = this.emp_list[event.target.value-1].pw;
+        }
+      }
+    },
+  })
+</script>

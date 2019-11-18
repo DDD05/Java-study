@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <!-- <link rel="stylesheet" type="text/css" href="./table.css" /> -->
+  <title>SSAFY</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+  <script src="../vue.js"></script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+
+    /* input elements */
+    input {
+      font-size: 12px;
+    }
+
+    textarea {
+      font-size: 12px;
+    }
+
+    input.txt {
+      padding-top: 3px;
+      height: 18px;
+    }
+
+    select {
+      font-size: 12px;
+      height: 20px;
+    }
+
+    .headtitle {
+      margin: auto;
+      padding: 0px;
+      text-align: center;
+      color: blue;
+      font-family: serif;
+    }
+
+    .headtitle>h2 {
+      margin: auto;
+      padding: 0px;
+      text-align: center;
+      color: blue;
+      font-family: serif;
+    }
+
+    .list_table {
+      width: 98%;
+      border-bottom: 1px solid #EFEFEF;
+      border-right: 1px solid #EFEFEF;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+      clear: both;
+    }
+
+    .list_table2 {
+      width: 98%;
+      border-bottom: 1px solid #EFEFEF;
+      border-right: 1px solid #EFEFEF;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+      clear: both;
+      vertical-align: middle;
+      text-align: center
+    }
+
+    .list_table td,
+    .list_table th {
+      text-align: center;
+      border-top: 1px solid #EFEFEF;
+      border-left: 1px solid #EFEFEF;
+      padding: 0.3em;
+    }
+
+    .list_table th {
+      background-color: #4D6BB3;
+      color: #FFFFFF;
+      line-height: 1.7em;
+      font-weight: normal;
+    }
+
+    .list_table tr td {
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+    }
+
+    .list_table td.title {
+      padding-left: 0.5em;
+      text-align: left;
+    }
+
+    .list_table td.title a:hover {
+      text-decoration: underline;
+    }
+
+    .list_table th,
+    .list_table td {
+      vertical-align: middle;
+    }
+
+    .list_table select {
+      height: 19px;
+      border: #CCCCCC solid 1px;
+      vertical-align: middle;
+      line-height: 1.8em;
+      padding-left: 0px;
+    }
+
+    .list_table select option {
+      margin-right: 10px;
+    }
+
+    .list_table .selected_row {
+      border: solid 0px #EFEFEF;
+    }
+
+    .list_table .sele {
+      padding: 0;
+      margin: 0;
+    }
+
+    .content_table {
+      width: 98%;
+      border-bottom: 1px solid #EFEFEF;
+      border-right: 1px solid #EFEFEF;
+      border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+      clear: both;
+    }
+
+    .content_table td,
+    .content_table th {
+      text-align: center;
+      border-top: 1px solid #EFEFEF;
+      border-left: 1px solid #EFEFEF;
+      padding: 0.3em;
+    }
+
+    .content_table th {
+      background-color: #4D6BB3;
+      color: #FFFFFF;
+      line-height: 1.7em;
+      font-weight: normal;
+    }
+
+    .content_table td {
+      padding-left: 5px;
+      text-align: left;
+      line-height: 1.7em;
+    }
+
+    .content_table td.contents {
+      width: 100%;
+      height: 400px;
+      overflow: auto;
+    }
+
+    .content_table th,
+    .content_table td {
+      vertical-align: middle;
+    }
+
+    .content_table select {
+      height: 19px;
+      border: #CCCCCC solid 1px;
+      vertical-align: middle;
+      line-height: 1.8em;
+      padding-left: 0px;
+    }
+
+    .content_table select option {
+      margin-right: 10px;
+    }
+
+    #files_wrap {
+      width: 99.5%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #files_wrap #_file_list_item {
+      list-style-type: disc;
+    }
+
+    .box_border {
+      width: 98%;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #EFEFEF;
+      background-color: #FFFFFF;
+      text-align: right;
+      padding: 2px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search_box {
+      width: 98%;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #EFEFEF;
+      background-color: #FFFFFF;
+      padding: 2px;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      text-align: center;
+      line-height: 2.1em;
+    }
+
+    .items_title {
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 28px;
+      padding-top: 3px;
+      background-image: url("../image/shape_square.png");
+      background-repeat: no-repeat;
+      background-position: 10px 0px;
+      margin-top: 25px;
+      margin-bottom: 1px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .items_description {
+      width: 98%;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #EFEFEF;
+      background-color: #FFFFFF;
+      text-align: left;
+      line-height: 2.5;
+      padding: 2px;
+      margin: 0px;
+    }
+
+    .checkbox_lable {
+      vertical-align: 2px;
+      margin-left: 5px;
+      margin-right: 5px;
+      _vertical-align: 4px;
+      _margin-left: 0px;
+      _margin-right: 2px;
+      /* IE6 Hack */
+    }
+
+    .go_view {
+      cursor: pointer;
+      text-align: left;
+      padding-left: 3px;
+    }
+
+    .calendar_icon {
+      cursor: pointer;
+      border: 0;
+      width: 22px;
+      vertical-align: -6px;
+      *vertical-align: -6px;
+    }
+
+    .tored {
+      color: #aabbcc;
+      background-color: #ddbbaa
+    }
+  </style>
+</head>
+
+<body>
+  <div id='app' v-cloak>
+    <div class='headtitle'>
+      <h2>SSAFY HRM SEARCH BY {{status | toupper}}</h2>
+    </div>
+    <div class='search_box'>
+      <a href='#' @click="status='insert'">사원추가</a> |
+      <a href='#' @click="status='name', searching=''">이름으로 찾기</a> |
+      <a href='#' @click="status='id', searching=''">아이디로 찾기</a> |
+      <a href='#' @click="allsearch">모든사원 보기</a>
+    </div>
+    <div class='search_box' v-if="status == 'id'">
+      <select name="search_by_name" v-model="searching">
+        <option disabled value="">선택해주세요</option>
+        <option v-for="(value, index) in emps" :value="value.id">{{value.name}}</option>
+      </select>
+    </div>
+    <div class="search_box" v-if="status == 'name'">
+      이름으로 찾기 : <input type="text" @input="searching=$event.target.value">
+    </div>
+    <div class="search_box" v-if="status == 'insert'">
+
+      <form action="" method="POST" name="frmForm" id="_frmForm" @submit.prevent="addEmployee">
+        <table class="content_table">
+          <colgroup>
+            <col style="width:30%" />
+            <col style="width:70%" />
+          </colgroup>
+          <tr>
+            <th>이름</th>
+            <td><input type="text" name="name" id="_name" size="30" v-model="emp.cname" /></td>
+          </tr>
+          <tr>
+            <th>이메일</th>
+            <td><input type="text" name="mailid" id="_mailid" size="20" v-model="emp.cmailid" /></td>
+          </tr>
+          <tr>
+            <th>고용일</th>
+            <td><input type="date" name="start_date" id="_start_date" size="30" v-model="emp.cstart_date" /></td>
+          </tr>
+          <tr>
+            <th>관리자</th>
+            <td>
+              <select name="manager_id" v-model="emp.cmanager_id">
+                <option v-for="emp in info" v-bind:value="emp.id">
+                  {{emp.id}} : {{emp.name}}
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>직책</th>
+            <td>
+              <select name="title" v-model="emp.ctitle">
+                <option v-for="emp in titles" v-bind:value="emp.title">
+                  {{emp.title}}
+                </option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>부서</th>
+            <td>
+              <select name="dept_id" v-model="emp.cdept_id">
+                <!--  -->
+                <option v-for="dept in depts" v-bind:value="dept.dept_id">
+                  {{dept.dept_id}} : {{dept.name}}
+                </option>
+              </select>
+
+            </td>
+          </tr>
+          <tr>
+            <th>월급</th>
+            <td><input type="number" name="salary" id="_salary" size="30" v-model="emp.csalary" min="0" /></td>
+          </tr>
+          <tr>
+            <th>커미션</th>
+            <td><input type="number" name="commission_pct" id="_commission_pct" size="30" v-model="emp.ccommission_pct"
+                min="0" /></td>
+          </tr>
+          <tr>
+            <td colspan="2" style="height: 50px; text-align: center;">
+              <button type="submit" name="button">사원 추가</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <table class='list_table'>
+      <col width="10%">
+      <col width="20%">
+      <col width="20%">
+      <col width="20%">
+      <col width="10%">
+      <tr>
+        <th>사원 아이디</th>
+        <th>사원명</th>
+        <th>부서</th>
+        <th>직책</th>
+        <th>연봉</th>
+      </tr>
+      <tr v-for="emp in printList">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.dept_id }}</td>
+        <td>{{ emp.title }}</td>
+        <td>{{ emp.salary | salaryDouble }}</td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>
+<script type="text/javascript">
+  var app = new Vue({
+    el: "#app",
+    data: () => {
+      return {
+        emp: {
+          cname: "",
+          cmailid: "",
+          cstart_date: "",
+          cmanager_id: "",
+          ctitle: "",
+          cdept_id: "",
+          cdept_name: "",
+          csalary:"",
+          ccommission:""
+        },
+        emps: null,
+        error: false,
+        loading: true,
+        status: "all",
+        searching: "",
+        printList: null
+      }
+    },
+    methods: {
+      search: function (event) {
+        this.printList = []
+
+        for (emp of this.emps) {
+          if (this.status == "id") {
+            if (this.searching == emp.id) {
+              this.printList.push(emp);
+              break;
+            }
+          }
+          else if (this.status == "name") {
+            if (emp.name.includes(this.searching)) {
+              this.printList.push(emp);
+            }
+          }
+        }//for emps
+      },
+      allsearch: function () {
+        console.log("all search 입니다.");
+
+        this.printList = [];
+        this.printList = this.emps;
+        this.status = "all";
+      },
+      addEmp: function () {
+
+        axios
+          .post('http://localhost:9999/api/addEmployee',
+            emp
+          )
+          .then(response => {
+            console.log("success!!!!!!");
+            this.emps.push(emp);
+          })
+          .catch(error => {
+            this.error = true;
+          })
+      }
+    },
+    watch: {
+      searching: function () {
+        this.search()
+      }
+    },
+    filters: {
+      toupper: function (value) {
+        return value.toUpperCase();
+      },
+      salaryDouble: function (value) {
+        return Math.round(value).toFixed(2);
+      }
+    },
+    mounted() {
+      axios
+        .get('http://localhost:9999/api/findAllEmployees')
+        .then(response => {
+          this.emps = response.data;
+          this.printList = this.emps;
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => this.loading = false)
+    },
+  })
+
+</script>

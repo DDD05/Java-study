@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <template id="timeTemplate">
+        <div>
+            <span>{{nowTS}}</span>
+            <button @click="timeClick">현재시간</button>
+        </div>
+    </template>
+
+    <div id="app">
+        <timecomponent> </timecomponent>
+    </div>
+
+    <script>    
+        Vue.component("timecomponent", {
+            template: "#timeTemplate",
+            data() {
+                return {
+                    nowTS : 0
+                }
+            },
+            /*
+                component 내부에 상태정보를 저장하기 위해서 data 옵션을 사용.
+                하지만 값을 직접 지정하면 오류가 난다.
+                data 함수가 호출되어서 리턴된 데이터가 data에 지정되도록 해야함.... 동적함수로 사용해야함
+                ::
+
+                정적인 데이터 옵션 사용하면 안되는 이유는,
+                동일한 컴포넌가 여러번 재사용 되더라도 동일한 객체를 가리키는 것이 아니라
+                함수가 호출될때마다 그때 만들어진 값이 리턴되도록 하기 위해서이다.             
+
+            
+            */ 
+            methods: {
+                timeClick(e) {
+                    this.nowTS = new Date().getTime();
+                }
+            },
+        })
+
+        var app = new Vue({
+            el: "#app",
+        })
+    </script>
+
+</body>
+
+</html>

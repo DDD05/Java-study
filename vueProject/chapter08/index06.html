@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+    <style>
+        #list{ width: 400px; border : 1px solid greenyellow; border-collapse: collapse;}
+        #list td , #list th{border : 1px solid black ; text-align: center;}
+        #list >thead>tr {color: yellow; background-color: purple;}
+    </style>
+</head>
+<!-- template부분 -->
+<!-- .vue 파일에서의 js에 해당합니다. -->
+<template id="listTemplate">
+    <div>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>사원이름</th>
+                    <th>메일</th>
+                    <th>직책</th>
+                </tr>
+            </thead>
+            <br>
+            <tbody>
+                <tr v-for="emp in emps">
+                    <td>{{emp.id}}</td>
+                    <td>{{emp.name}}</td>
+                    <td>{{emp.mailid}}</td>
+                    <td>{{emp.title}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+    Vue.component('listComponent',{
+        template:'#listTemplate',
+        props:['emps'],
+    })
+</script>
+<body>
+    <div id="app">
+        <h1>EMPLOYEE LIST INFO</h1>
+        <list-component :emps='list1'></list-component>
+        <list-component :emps='list2'></list-component>
+    </div>
+</body>
+
+<script>
+new Vue({
+    el:'#app',
+    data : {
+        list1: [{"id":1,"name":"박구곤","mailid":"sky98","start_date":"1990-03-03","manager_id":0,"title":"사장","dept_id":118,"salary":5000.0,"commission_pct":0.0},
+        {"id":2,"name":"손명성","mailid":"2xxsig","start_date":"1990-03-08","manager_id":1,"title":"기획부장","dept_id":110,"salary":3000.0,"commission_pct":0.0},
+        ],
+        list2:[{"id":3,"name":"이은선","mailid":"ch21175","start_date":"1991-06-17","manager_id":1,"title":"영업부장","dept_id":102,"salary":3500.0,"commission_pct":0.0},
+        {"id":4,"name":"서의홍","mailid":"mquickto","start_date":"1990-04-07","manager_id":1,"title":"총무부장","dept_id":101,"salary":3000.0,"commission_pct":0.0},]
+    }
+})
+</script>
+
+</html>

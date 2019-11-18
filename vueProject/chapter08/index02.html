@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <template id="hello-Templeate">
+        <div>
+            hello-Templeate 냥...
+        </div>
+    </template>
+    <div id="app">
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+    </div>
+</body>
+
+</html>
+<script>
+    // 컴포넌트에서 사용할 태그이름
+    // 케밥 표기법을 권장합니다.
+    // modul 
+    Vue.component("helloComponent", {
+        template: "#hello-Templeate"
+    })
+</script>
+<script>
+    // root component 
+    var app = new Vue({
+        el: "#app",
+    })
+</script>

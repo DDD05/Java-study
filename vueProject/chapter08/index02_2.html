@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <template id="hellotempleate">
+        <option>Hello world</option>
+        <option>2222 world222</option>
+        <!-- template 태그 안에서 루트요소는 하나이어야 합니다bundleRenderer.renderToStream
+            내부에 여러 요소를 작성해야 한다면 div 요소등을 이용해서 감싸주어야 한다.
+        -->
+    </template>
+    <div id="app">
+        <!-- select 태그의 자식태그를 template으로 가져와서 사용할때 속성을 사용 -->
+        <select>
+            <option is="hellocomponent"></option>
+            <option is="hellocomponent"></option>
+        </select>
+    </div>
+</body>
+
+</html>
+<script>
+    // 컴포넌트에서 사용할 태그이름
+    // 전무 소문자로 가는것을 권장 ( 케밥 -> (js) 카멜 가능~)
+    // modul 
+    Vue.component("hellocomponent", {
+        template: "#hellotempleate"
+    })
+</script>
+<script>
+    // root component 
+    var app = new Vue({
+        el: "#app",
+    })
+</script>

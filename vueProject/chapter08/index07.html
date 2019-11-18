@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<template id="childTemplate">
+    <div>
+        <!-- 자식 컴포넌트에 이벤트를 바인딩 -->
+        <button @click="incrementcounter">{{counter}}</button>
+    </div>
+</template>
+
+<body>
+    <div id="app">
+        {{total}}
+        <buttoncounter v-on:increment=incrementTotal></buttoncounter>
+    </div>
+</body>
+
+</html>
+
+<script>
+    Vue.component("buttoncounter", {
+        template: "#childTemplate",
+        data() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            incrementcounter() {
+                this.counter++;
+                //자식 컴포넌트는 이벤트를 발산 -> 부모쪽으로 
+                this.$emit("increment",this.counter);
+            }
+        },
+    })
+
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            total: 0
+        },
+        methods: {
+            incrementTotal(value) {
+                this.total=value;
+            }
+        }
+    })
+
+</script>
