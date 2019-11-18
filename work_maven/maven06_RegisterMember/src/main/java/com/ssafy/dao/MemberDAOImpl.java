@@ -13,6 +13,7 @@ public class MemberDAOImpl implements MemberDAO
 {
 	@Autowired
 	private SqlSession sqlSession;
+	
 	private final String ns = "MemberMapper.";
 	
 	@Override
