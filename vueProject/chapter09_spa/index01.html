@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
+    <link rel="stylesheet" type="text/css" href="./table.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="headtitle">
+            <h2>SSAFY HRM LIST</h2>
+        </div>
+        <div class="search_box">
+            <router-link to="/router4">사원추가</router-link> |
+            <router-link to="/router3">이름으로 찾기</router-link> |
+            <router-link to="/router2">아이디로 찾기</router-link> |
+            <router-link to="/router1">모든사원 보기</router-link>
+        </div>
+
+        <router-view></router-view>
+    </div>
+
+    <!-- template 영역.... -->
+    <script type="text/x-template" id="listhrmtemplate">
+      <div>
+          <table class='list_table'>
+              <col width="10%"><col width="20%">
+              <col width="20%"><col width="20%"><col width="10%">
+              <tr>
+                  <th>사원 아이디</th>
+                  <th>사원명</th>
+                  <th>부서</th>
+                  <th>직책</th>
+                  <th>연봉</th>
+              </tr>
+              <tr v-for="emp in info" @click="show_detail(emp.id)"> 
+                  <td v-html="emp.id" ></td>
+                  <td v-html="emp.name"></td>
+                  <td v-html="emp.dept_id"></td>
+                  <td v-html="emp.title"></td>
+                  <td>{{ emp.salary | salarydecimal }}</td>
+              </tr>
+          </table>
+
+      </div>
+    </script>
+    <script type="text/x-template" id="idhrmtemplate">
+        <div>
+            <div class='search_box'>
+                    <select name = "id" @change = "findid" v-model = "searching">
+                        <option v-for="emp in info"  v-bind:value="emp.id">
+                            {{emp.name}}
+                        </option>   
+                    </select>
+            </div>
+
+            <table class='list_table'>
+                <col width="10%"><col width="20%">
+                <col width="20%"><col width="20%"><col width="10%">
+                <tr>
+                    <th>사원 아이디</th>
+                    <th>사원명</th>
+                    <th>부서</th>
+                    <th>직책</th>
+                    <th>연봉</th>
+                </tr>
+                <tr v-if="empEmpty">
+                        <td v-html="printList.id"></td>
+                        <td v-html="printList.name"></td>
+                        <td v-html="printList.dept_id"></td>
+                        <td v-html="printList.title"></td>
+                        <td>{{ printList.salary | salarydecimal }}</td>
+                </tr>
+            </table>
+        </div>
+    </script>
+    <script type="text/x-template" id="namehrmtemplate">
+        <div>
+                <div class='search_box'>
+                    <input type="text" v-model="searching" @keyup.enter="findname">
+                </div>
+                <table class='list_table'>
+                        <col width="10%"><col width="20%">
+                        <col width="20%"><col width="20%"><col width="10%">
+                        <tr>
+                            <th>사원 아이디</th>
+                            <th>사원명</th>
+                            <th>부서</th>
+                            <th>직책</th>
+                            <th>연봉</th>
+                        </tr>
+                        <tr v-if="empEmpty" v-for="(item, index) in printList" :key="index">
+                                <td v-html="item.id"></td>
+                                <td v-html="item.name"></td>
+                                <td v-html="item.dept_id"></td>
+                                <td v-html="item.title"></td>
+                                <td>{{ item.salary | salarydecimal }}</td>
+                        </tr>
+                    </table>
+          </div>
+    </script>
+    <script type="text/x-template" id="addemphrmtemplate">
+        <div>
+            <form action="" method="POST" name="frmForm" id="_frmForm" @submit.prevent="addEmp">
+                <table class="content_table">
+                    <colgroup>
+                        <col style="width:30%" />
+                        <col style="width:70%" />
+                    </colgroup>
+                    <tr>
+                        <th>이름</th>
+                        <td><input type="text" name="name" id="_name" size="30" v-model="emp.cname" /></td>
+                    </tr>
+                    <tr>
+                        <th>이메일</th>
+                        <td><input type="text" name="mailid" id="_mailid" size="20" v-model="emp.cmailid" /></td>
+                    </tr>
+                    <tr>
+                        <th>고용일</th>
+                        <td><input type="date" name="start_date" id="_start_date" size="30" v-model="emp.cstart_date" /></td>
+                    </tr>
+                    <tr>
+                        <th>관리자</th>
+                        <td>
+                            <select name="manager_id" v-model="emp.cmanager_id">
+                            <option v-for="e in info" v-bind:value="e.id">
+                                {{e.id}} : {{e.name}}
+                            </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>직책</th>
+                        <td>
+                            <select name="title" v-model="emp.ctitle">
+                                <option v-for="t in titles" v-bind:value="t">
+                                {{t}}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>부서</th>
+                        <td>
+                            <select name="dept_id" v-model="emp.cdept_id">
+                            
+                                <option v-for="dept in depts" v-bind:value="dept.dept_id">
+                                {{dept.dept_id}} : {{dept.name}}
+                                </option>
+                            </select>
+                
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>월급</th>
+                        <td><input type="number" name="salary" id="_salary" size="30" v-model="emp.csalary"  min="0"/></td>
+                    </tr>
+                    <tr>
+                        <th>커미션</th>
+                        <td><input type="number" name="commission_pct" id="_commission_pct" size="30" v-model="emp.ccommission_pct" min="0"/></td>
+                    </tr>
+                    <tr>
+                    <td colspan="2" style="height: 50px; text-align: center;">
+                        <button type="submit" name="button">사원 추가</button>
+                    </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </script>
+    <script type="text/x-template" id="detailtemplate">
+        {{emp}}
+    </script>
+    <!-- 2. Vue.component -->
+
+    <script>
+            var detailhrm =Vue.component("detailhrm", {
+                template: "#detailtemplate",
+                data() {
+                    return {
+                        info: null,
+                        loading: true,
+                        errored: false
+                    };
+                },
+                filters: {
+                    salaryDouble: function (value) {
+                        return Math.round(value).toFixed(2);
+                    }
+                },
+                mounted() {
+                    axios
+                        .get("http://localhost:9999/api/findEmployeeById/")
+    
+                        .then(response => (this.info = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => (this.loading = false));
+                },
+                methods: {
+                    show_detail(employeeid) {
+    
+                    }
+                }
+            });
+        </script>
+
+    <script>
+        var listhrm =Vue.component("listhrm", {
+            template: "#listhrmtemplate",
+            data() {
+                return {
+                    info: null,
+                    loading: true,
+                    errored: false
+                };
+            },
+            filters: {
+                salaryDouble: function (value) {
+                    return Math.round(value).toFixed(2);
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:9999/api/findAllEmployees")
+
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.loading = false));
+            },
+            methods: {
+                show_detail(employeeid) {
+
+                }
+            }
+        });
+    </script>
+    <script>
+        var idhrm = Vue.component("idhrm", {
+            template: "#idhrmtemplate",
+            data() {
+                return {
+                    searching: "",
+                    printList: {},
+                    empEmpty: false,
+                    info: null,
+                    loading: true,
+                    errored: false
+                };
+            },
+            filters: {
+                salaryDouble: function (value) {
+                    return Math.round(value).toFixed(2);
+                }
+            },
+            methods: {
+
+                findid() {
+                    console.log(this.searching);
+                    axios
+                        .get("http://localhost:9999/api/findEmployeeById/" + this.searching)
+
+                        .then(response => {
+                            this.printList = response.data;
+                            this.empEmpty = true;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => (this.loading = false));
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:9999/api/findAllEmployees")
+
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.empEmpty = false));
+            },
+        })
+    </script>
+    <script>
+        var namehrm =Vue.component("namehrm", {
+            template: "#namehrmtemplate",
+            data() {
+                return {
+                    searching: "",
+                    printList: {},
+                    empEmpty: false,
+                    info: null,
+                    loading: true,
+                    errored: false
+                };
+            },
+            methods: {
+                findname() {
+                    console.log(this.searching);
+                    axios
+                        .get("http://localhost:9999/api/findLikeEmployees/" + this.searching)
+
+                        .then(response => {
+                            this.printList = response.data;
+                            this.empEmpty = true;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => (this.loading = false));
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:9999/api/findAllEmployees")
+
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.empEmpty = false));
+            },
+        })
+    </script>
+    <script>
+        var addemphrm = Vue.component("addemphrm", {
+            template: "#addemphrmtemplate",
+            data: () => {
+                return {
+                    emp: {
+                        cname: "",
+                        cmailid: "",
+                        cstart_date: "",
+                        cmanager_id: "",
+                        ctitle: "",
+                        cdept_id: "",
+                        cdept_name: "",
+                        csalary: "",
+                        ccommission: ""
+                    },
+                    info: null,
+                    error: false,
+                    loading: true,
+                    titles: [],
+                    depts: {},
+                }
+            },
+            methods: {
+                addEmp: function () {
+
+                    axios
+                        .post('http://localhost:9999/api/addEmployee',
+                            this.emp
+                        )
+                        .then(response => {
+                            console.log("success!!!!!!");
+                        })
+                        .catch(error => {
+                            this.error = true;
+                        })
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:9999/api/findAllEmployees")
+
+                    .then(response => {
+                        this.info = response.data
+                        
+                        for (emp of this.info) {
+                            if (!this.titles.includes(emp.title))
+                                this.titles.push(emp.title);
+                        }
+                        console.log(this.info.title);
+                        console.log(this.titles);
+                        
+
+                        this.depts =
+                            [
+                                { dept_id: "110", name: "기획부" },
+                                { dept_id: "111", name: "기획부", },
+                                { dept_id: "112", name: "기획부", },
+                                { dept_id: "113", name: "기획부", },
+                                { dept_id: "102", name: "영업부", },
+                                { dept_id: "103", name: "영업부", },
+                                { dept_id: "104", name: "영업부", },
+                                { dept_id: "105", name: "영업부", },
+                                { dept_id: "106", name: "영업부", },
+                                { dept_id: "118", name: "인사부", },
+                                { dept_id: "101", name: "총무부", },
+                                { dept_id: "120", name: "회계부", },
+                            ];
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.empEmpty = false));
+            },
+        })
+    </script>
+    <!-- 3. 라우터 정의 부분 -->
+    <script>
+        const routes = [
+            { path: "/router1", component: listhrm },
+            { path: "/router2", component: idhrm },
+            { path: "/router3", component: namehrm },
+            { path: "/router4", component: addemphrm }
+        ];
+        const router = new VueRouter({
+            routes
+        });
+    </script>
+
+
+
+
+
+    <!-- <script type="text/x-template" id="idhrmtemplate">
+      <div>
+          <div class='search_box'>
+              <select name = "id" @change = "findbyid" v-model = "cid">
+                  <option v-for="emp in info"  v-bind:value="emp.id">
+                      {{emp.name}}
+                  </option>
+              </select>
+          </div>
+          <table class='list_table'>
+              <col width="10%"><col width="20%">
+              <col width="20%"><col width="20%"><col width="10%">
+              <tr>
+                  <th>사원 아이디</th>
+                  <th>사원명</th>
+                  <th>부서</th>
+                  <th>직책</th>
+                  <th>연봉</th>
+              </tr>
+              <tr v-if="!empEmpty">
+                  <td v-html="cemp.id"></td>
+                  <td v-html="cemp.name"></td>
+                  <td v-html="cemp.dept_id"></td>
+                  <td v-html="cemp.title"></td>
+                  <td>{{ cemp.salary | salarydecimal }}</td>
+              </tr>
+          </table>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="namehrmtemplate">
+      <div>
+            <div class='search_box'>
+                <input type="text" v-mdel="searchingName" @keyup.enter="findbyName">
+            </div>
+            <table class='list_table'>
+                    <col width="10%"><col width="20%">
+                    <col width="20%"><col width="20%"><col width="10%">
+                    <tr>
+                        <th>사원 아이디</th>
+                        <th>사원명</th>
+                        <th>부서</th>
+                        <th>직책</th>
+                        <th>연봉</th>
+                    </tr>
+                    <tr v-if="!empEmpty">
+                        <td v-html="cemp.id"></td>
+                        <td v-html="cemp.name"></td>
+                        <td v-html="cemp.dept_id"></td>
+                        <td v-html="cemp.title"></td>
+                        <td>{{ cemp.salary | salarydecimal }}</td>
+                    </tr>
+                </table>
+      </div>
+    </script>
+
+    <script type="text/x-template" id="detailtemplate">
+        <div>
+
+        </div>
+    </script>
+
+    <!-- 2. Vue.component 
+    <script>
+        Vue.component("listhrm", {
+            template: "#listhrmtemplate",
+            data() {
+                return {
+                    info: null,
+                    loading: true,
+                    errored: false
+                };
+            },
+            filters: {
+                salarydecimal(value) {
+                    return value.toFixed(2);
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:9999/api/findAllEmployees")
+
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.loading = false));
+            },
+            methods: {
+                show_detail(employeeid) {
+
+                }
+            }
+        });
+        Vue.component("idhrm", {
+            template: "#idhrmtemplate",
+            data() {
+                return {
+                    emp: "",
+                    info: null,
+                    loading: true,
+                    errored: false,
+                    cid: "",
+                    cemp: {},
+                    empEmpty: true
+                };
+            },
+            filters: {
+                salarydecimal(value) {
+                    console.log(value);
+                    return value.toFixed(2);
+                }
+            },
+            mounted() {
+                axios
+                    .get("http://localhost:9999/api/findAllEmployees")
+
+                    .then(response => (this.info = response.data))
+                    .catch(error => {
+                        console.log(error);
+                        this.errored = true;
+                    })
+                    .finally(() => (this.empEmpty = false));
+            },
+            methods: {
+                findbyid() {
+                    console.log(this.cid);
+                    axios
+                        .get("http://localhost:9999/api/findEmployeeById/" + this.cid)
+
+                        .then(response => (this.cemp = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => (this.loading = false));
+                }
+            }
+        });
+        Vue.component("namehrm", {
+            template: "#namehrmtemplate",
+            data() {
+                return {
+                    searchingName: "",
+                    info: null,
+                    loading: true,
+                    errored: false
+                };
+            },
+            methods: {
+                findbyName() {
+                    console.log(this.cid);
+                    axios
+                        .get("http://localhost:9999/api/findLikeEmployees/" + this.searchingName)
+
+                        .then(response => (this.info = response.data))
+                        .catch(error => {
+                            console.log(error);
+                            this.errored = true;
+                        })
+                        .finally(() => (this.loading = false));
+                }
+            },
+        });
+
+        Vue.component("detailhrm", {
+            template: "#detailtemplate",
+            data() {
+                return {
+
+                }
+            },
+            mounted() {
+
+            }
+        })
+    </script>
+
+
+    <script>
+        const routes = [
+            { path: "/router1", component: "listhrm" },
+            { path: "/router2", component: "idhrm" },
+            { path: "/router3", component: "namehrm" }
+        ];
+        const router = new VueRouter({
+            routes
+        });
+    </script> -->
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        router
+    });
+    Vue.config.devtools = true
+</script>
+
+</html>
