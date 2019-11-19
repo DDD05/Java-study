@@ -9,10 +9,10 @@
 </head>
 <body>
   <div id="app">
-    <span>여러 줄을 가지는 메시지:</span>
-    <p style="white-space: pre-line" >{{message}}</p>
-    <br>
-    <textarea v-model="message" placeholder="여러줄을 입력해보세요"></textarea>
+    {{content}} <br>
+    전화 번호 <span v-html="content"></span> <br>
+    나이 : <span v-text="content"></span><br>
+    <p   style="color: red;"> fdsfdsfsdfsfsdfs</p>
   </div>
 </body>
 </html>
@@ -22,7 +22,15 @@ var app = new Vue({
 
   el : "#app",
   data : {
-    message : ''
+    name : "이성준",
+    number : "010-8262-3777",
+    age : 27,
+    content : "<h2> 안녕 </h2>"
+  },
+  filters:{
+    decimal(value){
+      return Math.round(value)
+    }
   }
 
 })
