@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let msg = "Global"
+        function sayHello() {
+            let msg = "outer"
+            console.log(msg);
+            if(true){
+                let msg = "block"
+                // es6에서 ... let으로 선언한 변수는 트랜스파일한 코드에서 확인해보면 
+                // 변수명을 _msg로 변경하여 이름 충돌을 피하도록 한다.
+                console.log(msg);
+            }
+        }
+        console.log(msg);
+        sayHello();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
