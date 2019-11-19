@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{items[0].size}}
+    </div>
+</body>
+</html>
+
+<script>
+    var model = {
+        size : 0 ,
+        items:[
+            {size:11},
+            {size: 8}
+        ]
+    }
+
+    var app = new Vue({
+        el : "#app",
+        data : model,
+        computed: {
+            fiterSize(){
+                let size = this.size;
+                // return this.items.filters(function(item){
+                //     return item.size===size;
+                // }),
+                return this.item.filters(item=>{ // 라이프 사이클에서는 사용금지
+                    return item.size === size;
+                })
+            }
+        },
+    })
+</script>

@@ -1,0 +1,40 @@
+<!-- 
+    let ::
+    1. 상수값이 아니기 때문에 일단 값변경은 가능
+        var와 다르게 선언한 변수명과 동일한 이름으로 변수지정할 수 없다... var 보완
+
+    2. 일종의 지역변수로 간주
+    3. scope는 function단위가 아닌 block level scope
+        ex) function안에서 let으로 변수 지정하고 function 밖에서 해당 let변수를 호출하면???
+            >> 값이 안아노다 undefinded
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        let greet = "hello"
+        // let greet = "good night"
+        console.log(greet);
+    </script>
+    <script>
+        function sayGreet(){
+            let a = 22;
+            if(true){
+                let b = 33;
+                console.log(a);
+            }
+            //변수 B는 if블락 밖에서는 접근 불가능 ... 
+            // console.log(b);
+            
+        }sayGreet();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
