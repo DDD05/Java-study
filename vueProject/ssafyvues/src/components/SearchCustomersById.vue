@@ -24,7 +24,7 @@
         <td v-html="printList.name"></td>
         <td v-html="printList.dept_id"></td>
         <td v-html="printList.title"></td>
-        <td>{{ printList.salary | salarydecimal }}</td>
+        <td>{{ printList.salary  }}</td>
       </tr>
     </table>
   </div>
@@ -63,12 +63,11 @@ export default {
         })
         .finally(() => (this.loading = false));
     },
-    // show_detail(employeeid) {
-    //   this.$router.push({
-    //     path: "/router5/" + employeeid,
-    //     component: detailhrm
-    //   });
-    // }
+    show_detail(employeeid) {
+      this.$router.push({
+        path: "/detailcustomer/" + employeeid
+      });
+    }
   },
   mounted() {
     axios

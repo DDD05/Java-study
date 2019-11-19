@@ -19,9 +19,11 @@
           ]
       2-3. 연결된 컴포넌트를 router-view영역에 실행함.
     -->
+        <router-link class="btn btn-primary" to="/addcustomeremp">사원 추가하기</router-link> |
         <router-link class="btn btn-primary" to="/searchbyname">사원 이름으로 검색하기</router-link> |
         <router-link class="btn btn-primary" to="/searchbyid">사원 ID로 검색하기</router-link> |
         <router-link class="btn btn-primary" to="/">모든사원 보기</router-link> |
+        <router-link class="btn btn-primary" to="/chartcustomer">부서별 인원보기</router-link> |
  </nav>
 </div>
         <router-view/>

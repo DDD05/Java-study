@@ -15,6 +15,7 @@
           <th>직책</th>
           <th>연봉</th>
           <th>퇴사</th>
+          <th>수정</th>
         </tr>
         <tr v-for="emp in info" class="nicecolor" :key="emp.id">
           <td v-html="emp.id" @click="show_detail(emp.id)"></td>
@@ -24,6 +25,9 @@
           <td>{{ emp.salary | salarydecimal }}</td>
           <td class="button" @click="delete_emp(emp.id)">
             <input type="button" class="blue" value="퇴사" />
+          </td>
+          <td class="button" @click="update_emp(emp.id)">
+            <input type="button" class="blue" value="수정" />
           </td>
         </tr>
       </table>
@@ -81,8 +85,19 @@ export default {
           this.errored = true;
         })
         .finally(() => (this.loading = false));
+    },
+     update_emp(employeeid) {
+      if (employeeid == 1) {
+        alert("사장님은 수정 할 수 없습니다.");
+        return;
+      }
+      var flag =  confirm(employeeid + "을 수정합니다.");
+      if(flag){
+        this.$router.push("/updatecustomer/" + employeeid);
+      }
     }
   },
+   
   filters: {
     salarydecimal(value) {
       var a = parseInt(value);

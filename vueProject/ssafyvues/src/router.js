@@ -3,6 +3,10 @@ import Router from "vue-router";
 import CustomersList from "./components/CustomersList.vue";
 import searchbyid from "./components/SearchCustomersById.vue";
 import searchbyname from "./components/SearchCustomersByName.vue";
+import detailcustomer from "./components/Detailcustomer.vue";
+import addcustomeremp from "./components/AddCustomerEmp.vue";
+import chartcustomer from "./components/ChartCustomer.vue";
+import updatecustomer from "./components/UpdateCustomerEmp.vue";
 Vue.use(Router);
 
 export default new Router({
@@ -16,13 +20,29 @@ export default new Router({
     },
     {
       path: "/searchbyid",
-      name: "searchbyid",
       component: searchbyid
     },
     {
       path: "/searchbyname",
-      name: "searchbyname",
       component: searchbyname
+    },
+    {
+      path: "/detailcustomer/:id",
+      component: detailcustomer,
+      props: true
+    },
+    {
+      path: "/updatecustomer/:id",
+      component: updatecustomer,
+      props: true
+    },
+    {
+      path: "/addcustomeremp",
+      component: addcustomeremp
+    },
+    {
+      path: "/chartcustomer",
+      component: chartcustomer
     }
   ]
 });
